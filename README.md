@@ -71,10 +71,6 @@ The project now includes a newspaper-style HTML prototype in:
 
 That page keeps the same daily section order while presenting it in a more editorial layout.
 
-README mockup:
-
-![Market Scanner Daily HTML mockup](daily-page/mockup.svg)
-
 For browser preview, start the local preview server:
 
 - macOS: `python3 daily-page/serve.py`
@@ -103,7 +99,6 @@ Example after a scan:
 Example file:
 
 - `daily-page/index.html`
-- `daily-page/mockup.svg`
 
 ## First-Time Codex Setup
 
@@ -232,6 +227,8 @@ Those changes should be preserved in the project memory so future scans follow t
 - Added a workflow rule that meaningful commits should also update this `Change Log`
 - Added a concrete README example showing how the HTML edition relates to a completed scan
 - Added a static SVG mockup in the README so GitHub visitors can preview the HTML edition visually
+- Replaced the README mockup with a smaller preview image taken from the real HTML scan example
+- Removed the embedded README preview image and kept the HTML section text-only again
 
 ## Repository Layout
 
