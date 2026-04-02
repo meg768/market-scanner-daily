@@ -20,6 +20,7 @@ Current user intent:
 - highlight abnormal moves across assets and equities globally
 - use the scan as an early-warning system for macro, policy, geopolitical, sector, and company-level change
 - have a single daily output to read like a newspaper without re-entering prompts
+- use the project as a sounding board for analyzing markets and spotting trends
 
 Preferred output style:
 
@@ -36,10 +37,11 @@ Preferred output style:
 - that `Help` response should also emphasize clearly that all scanner rules are adjustable by the user, including what to fetch, which instruments or sources to prioritize, what thresholds or criteria to use, how the paper is displayed, how it is stored, and how it is updated
 - that `Help` response should explain that user-requested changes to criteria, sources, thresholds, fetch logic, storage, layout, display style, and other workflow rules should be stored and used for future scans, without mentioning the underlying memory file by name
 - in user-facing replies, refer to this as the project memory or conversation context rather than by filename, unless the user explicitly asks about the file itself
-- when the user asks a short trigger such as `What's new?`, generate the current day's `YYYY-MM-DD.md` file and present that edition nicely formatted in the conversation
-- if a daily scan for that date already exists, overwrite it directly instead of asking first
-- treat every scan request as a full overwrite of the existing same-date edition; a scan is a scan, so do not ask whether to refresh, append, or preserve the earlier version
+- when the user asks a short trigger such as `What's new?`, run a fresh scan for the current date and present that edition nicely formatted in the conversation
+- a scan is always a scan: do not ask whether to refresh, append, preserve, or save a previous version
+- do not save each scan as a separate dated Markdown file
 - always present the daily market news in the same fixed format
+- keep all project documentation in English
 - when the user changes how data should be fetched, stored, or presented, save that instruction in this memory file
 - future behavior should follow the current contents of this memory file, not hard-coded assumptions that may become outdated
 - if the memory file is renamed in the future, keep all accumulated instructions in the renamed file and treat that renamed file as the source of truth
@@ -77,12 +79,10 @@ Use this structure for each new daily overview.
 Operational model:
 
 - this memory file stores long-term context, preferences, recurring sources, and process
-- each daily edition is stored as `YYYY-MM-DD.md`
-- the current edition for this workspace is `2026-04-02.md`
-- future daily runs should create or refresh the file for that exact date first, then append any durable insights or new sources back into this memory file
-- short trigger prompts like `What's new?` should be treated as requests to generate or refresh the current day's edition immediately and then render the result in-chat in polished markdown form
+- scans are generated fresh in chat when requested rather than being stored as dated daily files
+- durable insights, recurring sources, and workflow changes may be appended back into this memory file when useful
+- short trigger prompts like `What's new?` should be treated as requests to run a fresh current-day scan immediately and then render the result in chat in polished markdown form
 - short trigger prompts like `Help` should be treated as requests for a concise product description and scan-method explanation rather than a market scan
-- before each new scan, purge dated daily files older than seven days so only roughly one week of editions is kept locally
 
 ### 1. Executive Summary
 
@@ -179,7 +179,7 @@ End with 3-5 bullets:
 
 ## Fixed Output Format
 
-Use this exact section order for both the saved dated file and the in-chat market paper:
+Use this exact section order for each in-chat market paper:
 
 1. `Market Scanner Daily`
 2. date line
@@ -197,7 +197,7 @@ Formatting rules for the daily paper:
 
 - keep the same section names every day
 - if a section is thin that day, keep the section and state the most relevant item briefly
-- use the same newspaper-style markdown presentation in chat and in the dated file
+- use the same newspaper-style markdown presentation in chat every day
 - if there are later updates on the same date, update `Edition status` rather than changing the layout
 
 ## Daily Prompt Template
@@ -255,10 +255,9 @@ Durable insights from April 1, 2026:
 - always identify the likely catalyst behind a move
 - emphasize what is unusual, not what is merely active
 - note exact dates when discussing "today", "yesterday", or upcoming catalysts
-- when the user gives a minimal prompt asking for the latest update, interpret it as a request to produce the current dated daily edition
-- after writing the dated edition file, also display the same content in the conversation in a readable newspaper-style markdown layout
-- if a same-date daily edition already exists, overwrite it directly without asking first
-- when creating a new dated edition, first delete any `YYYY-MM-DD.md` files older than one week
+- when the user gives a minimal prompt asking for the latest update, interpret it as a request to produce the current daily market scan
+- display the scan content directly in the conversation in a readable newspaper-style markdown layout
+- a scan request should trigger a fresh scan immediately without asking whether to preserve or reuse a prior version
 - when the user updates the workflow or presentation, record the new rule in this memory file
 - before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
 - if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
@@ -280,7 +279,7 @@ This project is meant to be portable.
 - this memory file is the project brain and should travel with the project
 - if the file is renamed before being shared, the renamed file still remains the source of truth
 - a new Codex project should read this memory file first and follow its workflow rules
-- daily market editions are temporary working files, while this memory file preserves durable intent, preferences, sources, and operating rules
+- scans are generated on demand in chat, while this memory file preserves durable intent, preferences, sources, and operating rules
 - when in doubt, prefer updating this memory file over hard-coding workflow behavior elsewhere
 
 ## Project Setup And Restart
@@ -466,10 +465,8 @@ This file should be updated as the running context for future daily market scans
 - recurring themes
 - watchlists
 - recurring signal categories
-- scan outputs worth preserving
+- durable scan insights worth preserving
 
 Daily reading target:
 
-- open the dated file for the relevant day, for example `2026-03-31.md`
-
-- open the file named for the relevant date, for example `2026-03-31.md`
+- run a fresh scan for the relevant day in chat
