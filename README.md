@@ -63,31 +63,21 @@ If you are new to Codex, use this simple step-by-step flow.
 
 ### 2. Install Codex
 
-For this project, the easiest path is the Codex app:
+For this project, use the Codex app:
 
 - Download and install the Codex app for your operating system
 - Open the app
 - Sign in with your ChatGPT account when prompted
 
-If you prefer the terminal, you can also install the Codex CLI:
-
-```bash
-npm install -g @openai/codex
-```
-
-Then start it by running:
-
-```bash
-codex
-```
-
 ### 3. Open this project in Codex
 
 Once Codex is installed and you are signed in:
 
+- If you do not use Git, download the project as a ZIP from GitHub: [Download market-scanner-daily.zip](https://github.com/meg768/market-scanner-daily/archive/refs/heads/main.zip)
+- Unzip the downloaded file on your computer
 - Open Codex
 - Choose to open a local folder or project
-- Select this repository folder: `market-scanner-daily`
+- Select the unzipped `market-scanner-daily` folder
 - Wait for Codex to load the workspace context
 
 ### 4. Start with a simple first prompt
