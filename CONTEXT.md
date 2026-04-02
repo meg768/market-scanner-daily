@@ -241,6 +241,7 @@ Use this prompt for future scans:
 - only switch into developer-style mode when the user explicitly indicates that they are doing so
 - when the current user is working in a developer-style mode rather than as an end user, interpret requests like backup, restore, git operations, and workflow changes as developer operations
 - in developer mode, `commit` means commit plus push
+- in developer mode, when a commit includes meaningful user-facing or workflow changes, update the `Change Log` section in `README.md` as part of that commit
 - in developer mode, `backup` means update one rolling git backup that can be returned to later
 - do not create separate named backup tags unless the user explicitly asks for them
 - in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one

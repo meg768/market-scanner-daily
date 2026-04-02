@@ -213,6 +213,7 @@ Those changes should be preserved in the project memory so future scans follow t
 - Added a localhost preview server for opening the HTML page in a browser
 - Added a `Today's Edition` companion link in the chat paper format for the HTML page
 - Added a single-color HTML theme system based on `--theme-base` for easier retheming
+- Added a workflow rule that meaningful commits should also update this `Change Log`
 
 ## Repository Layout
 
