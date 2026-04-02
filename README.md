@@ -158,6 +158,15 @@ The scanner is intentionally configurable. Durable changes can be made to:
 
 Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
 
+## Change Log
+
+### April 2, 2026
+
+- Added a first-time Codex setup section for non-technical users
+- Added a direct GitHub ZIP download link for opening the project without Git
+- Simplified onboarding to focus on the Codex app instead of the CLI
+- Updated the scan workflow description so each `scan` request is treated as a new scan in chat
+
 ## Repository Layout
 
 - `AGENTS.md` sets project-level operating instructions for Codex
