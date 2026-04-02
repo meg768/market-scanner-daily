@@ -40,15 +40,14 @@ Every market paper uses the same section order:
 
 1. `Market Scanner Daily`
 2. Date line
-3. `Edition status`
-4. `Front Page`
-5. `Cross-Asset Dashboard`
-6. `Abnormal Moves`
-7. `Special Situations`
-8. `Catalyst Calendar`
-9. `Early-Info Signals`
-10. `What Matters Most`
-11. `Sources`
+3. `Front Page`
+4. `Cross-Asset Dashboard`
+5. `Abnormal Moves`
+6. `Special Situations`
+7. `Catalyst Calendar`
+8. `Early-Info Signals`
+9. `What Matters Most`
+10. `Sources`
 
 The aim is a concise market newspaper: overview first, then the most important cross-asset moves, then the situations and catalysts that deserve follow-up.
 
@@ -119,8 +118,8 @@ Expected behavior:
 - `scan` or `What's new?` runs a fresh scan for the current day
 - The paper is presented directly in chat
 - The layout stays fixed even when the market is quiet
-- Later same-day updates should revise `Edition status` instead of changing the structure
-- Scans are generated fresh in chat rather than saved as separate dated Markdown files
+- Each scan request creates a new scan in chat
+- The scan uses the same fixed structure each time
 
 ## Market Analysis Mode
 
