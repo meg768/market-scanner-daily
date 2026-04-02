@@ -30,6 +30,7 @@ Preferred output style:
 - then the most important cross-asset moves
 - then special situations / catalyst names
 - end with a short interpretation of what changed and why it matters
+- within each daily-paper section such as `Front Page`, `Cross-Asset Dashboard`, `Abnormal Moves`, and the others, prefer normal prose paragraphs over bullet-heavy formatting so the scan reads more like a newspaper
 - when the user types `Help` or something clearly similar such as `help`, `how does this work`, or `what do you do`, explain what the scanner is designed for and how the daily scan is fetched
 - that `Help` response should explicitly describe the scan criteria: start from market-generated signals rather than generic headlines, screen `USO`, `VIXY`, `SPY`, and major U.S. sectors first, compare moves versus recent normal behavior when possible, then confirm and explain the moves with current reporting and official releases
 - that `Help` response should list only the main explicit quick commands the user can type, keeping it minimal, for example `scan` and `help`
@@ -45,6 +46,8 @@ Preferred output style:
 - the HTML companion does not need to imitate any specific newspaper exactly; it may use a more creative editorial layout as long as the section order and readability stay strong
 - the HTML companion should use a single top-level base color in its CSS theme layer so the overall visual theme can be changed easily from one place
 - the HTML companion should reflect the same real information as the in-chat `scan`; it is a presentation layer, not a separate editorial version
+- section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
+- when working on HTML design in developer mode without asking for a live scan, prefer a stable local design-preview page so layout iteration does not depend on market research
 - keep all project documentation in English
 - when the user changes how data should be fetched, stored, or presented, save that instruction in this memory file
 - future behavior should follow the current contents of this memory file, not hard-coded assumptions that may become outdated
@@ -201,6 +204,7 @@ Formatting rules for the daily paper:
 - keep the same section names every day
 - if a section is thin that day, keep the section and state the most relevant item briefly
 - use the same newspaper-style markdown presentation in chat every day
+- inside each named section, default to short flowing text paragraphs rather than lists, unless a list is clearly the best fit for that specific content
 - each scan request should produce a new scan rather than revising an earlier one
 - if an HTML version is created, preserve the same section order and overall editorial logic there as well
 - if an HTML version is created, keep it aligned with the factual content of the current `scan` rather than letting the HTML page drift into its own separate summary
@@ -208,6 +212,7 @@ Formatting rules for the daily paper:
 - when a local HTML preview server is available, prefer a `http://127.0.0.1:8765/daily-page/index.html` style link over a local file link so clicks open in a browser rather than Finder
 - when the user types `scan`, treat the HTML companion link as automatic when available rather than optional; include it in the `Today's Edition` section by default
 - when feasible and when a local HTML preview workflow is active, a `scan` request may also open the HTML companion in a browser as a companion action to the normal chat scan
+- when working on HTML design only, a stable preview page such as `daily-page/design-preview.html` may be used instead of the live scan page
 
 ## Daily Prompt Template
 
@@ -234,20 +239,31 @@ Use this prompt for future scans:
 - note exact dates when discussing "today", "yesterday", or upcoming catalysts
 - when the user gives a minimal prompt asking for the latest update, interpret it as a request to produce the current daily market scan
 - display the scan content directly in the conversation in a readable newspaper-style markdown layout
+- keep the tone and layout slightly editorial, with section bodies written like normal article copy instead of checklist bullets whenever possible
 - a scan request should trigger a fresh scan immediately without asking whether to preserve or reuse a prior version
 - when the user updates the workflow or presentation, record the new rule in this memory file
 - when methods, analyses, short commands, or usage patterns change in this memory file, mirror the user-facing parts of that change in `README.md`
 - user mode is the default assumption
-- only switch into developer-style mode when the user explicitly indicates that they are doing so
-- when the current user is working in a developer-style mode rather than as an end user, interpret requests like backup, restore, git operations, and workflow changes as developer operations
+- do not assume the current user is the same as the future end user of the scanner; adapt tone and actions to the active role in the conversation
+- before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
+- if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
+
+## Developer Mode
+
+Use this section when the current user is working on the project itself rather than using the scanner as an end user.
+
+- user mode is the default assumption
+- only switch into developer mode when the user explicitly indicates that they are doing so, for example by saying `devmode`
+- when the current user is in developer mode, interpret requests like `backup`, `restore`, git operations, workflow edits, HTML design work, and memory updates as project-maintenance tasks
 - in developer mode, `commit` means commit plus push
 - in developer mode, when a commit includes meaningful user-facing or workflow changes, update the `Change Log` section in `README.md` as part of that commit
 - in developer mode, `backup` means update one rolling git backup that can be returned to later
 - do not create separate named backup tags unless the user explicitly asks for them
 - in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
-- do not assume the current user is the same as the future end user of the scanner; adapt tone and actions to the active role in the conversation
-- before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
-- if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
+- when doing HTML design work without asking for a live scan, prefer the stable preview page `daily-page/design-preview.html`
+- for HTML design iteration in developer mode, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
+- section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
+- current preferred HTML direction in developer mode: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
 
 ## Recurring Source Set
 

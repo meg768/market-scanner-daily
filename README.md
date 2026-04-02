@@ -54,6 +54,8 @@ Every market paper uses the same section order:
 
 The aim is a concise market newspaper: overview first, then the most important cross-asset moves, then the situations and catalysts that deserve follow-up.
 
+Inside each section, the default presentation should read like normal newspaper copy: short prose paragraphs first, with lists used only when they genuinely improve clarity.
+
 The same editorial structure can also be presented as an HTML page for a more visually polished, newspaper-like reading experience.
 
 The HTML presentation does not need to mimic any one newspaper exactly. It can use a more creative editorial design as long as the structure stays clear and readable.
@@ -62,11 +64,14 @@ Its theme should also be easy to retune: the HTML CSS is designed around one top
 
 The HTML page is meant to reflect the same underlying scan content as the chat edition. It is a more readable presentation layer, not a separate version with different facts or conclusions.
 
+Section labels such as `Front Page` and `Cross-Asset Dashboard` should appear as plain text, not as colored pill-shaped badges.
+
 ## HTML Daily Page
 
 The project now includes a newspaper-style HTML prototype in:
 
 - `daily-page/index.html`
+- `daily-page/design-preview.html`
 - `daily-page/serve.py`
 
 That page keeps the same daily section order while presenting it in a more editorial layout.
@@ -77,6 +82,11 @@ For browser preview, start the local preview server:
 - Windows: `python daily-page/serve.py`
 
 The script serves the page on localhost and attempts to open it automatically in your browser.
+
+For faster layout iteration without waiting for a fresh market scan, use the stable design-preview page:
+
+- Browser path: `http://127.0.0.1:8765/daily-page/design-preview.html`
+- Open it directly with: `python3 daily-page/serve.py --page design-preview`
 
 To retheme the HTML edition, change the `--theme-base` value near the top of `daily-page/styles.css`.
 
@@ -99,6 +109,14 @@ Example after a scan:
 Example file:
 
 - `daily-page/index.html`
+
+## Developer Workflow
+
+When working on the HTML presentation in developer mode, use the stable preview page first instead of waiting for a live scan.
+
+- Use `python3 daily-page/serve.py --page design-preview` for faster layout iteration
+- Prefer small, isolated style changes during design work
+- Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
 
 ## First-Time Codex Setup
 
@@ -170,6 +188,7 @@ Expected behavior:
 - when the HTML companion is available, `scan` also includes the browser link automatically near the top
 - `help`, `how does this work?`, or `what do you do?` explains how the scanner works
 - The paper is presented directly in chat
+- Each named section is written mainly as normal text rather than bullet-heavy notes
 - The layout stays fixed even when the market is quiet
 - Each scan request creates a new scan in chat
 - The scan uses the same fixed structure each time
@@ -213,6 +232,13 @@ The scanner is intentionally configurable. Durable changes can be made to:
 Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
 
 ## Change Log
+
+### April 3, 2026
+
+- Updated the scan style so each section is written primarily as normal newspaper-style text instead of bullet-heavy formatting
+- Mirrored that presentation rule in the README so the chat edition and documentation stay aligned
+- Added a stable HTML design preview page so layout work can happen without waiting for a fresh scan
+- Added a dedicated developer-mode section in the project memory to keep maintenance and design workflow rules in one place
 
 ### April 2, 2026
 

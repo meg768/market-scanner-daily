@@ -19,6 +19,9 @@
   --accent-dark: color-mix(in srgb, var(--theme-base) 44%, #163244);
   --positive: #1b6d58;
   --negative: #983224;
+  --card-surface:
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 8%, rgba(255, 255, 255, 0.82)), color-mix(in srgb, var(--theme-base) 3%, rgba(255, 255, 255, 0.94))),
+    var(--paper-soft);
   --shadow: 0 24px 60px color-mix(in srgb, var(--theme-base) 20%, rgba(29, 53, 74, 0.14));
 }
 
@@ -68,6 +71,7 @@ a {
 .masthead__date,
 .brief-card__title,
 .lead-story__kicker,
+.market-card h3,
 .market-card__move,
 .story-card h3,
 .signal-strip h3,
@@ -149,15 +153,14 @@ a {
 
 .section-label {
   grid-column: 1 / -1;
-  display: inline-flex;
-  align-items: center;
+  display: block;
   justify-self: start;
-  gap: 0.45rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--accent-mid), var(--accent-strong));
-  color: #f7fbff;
-  font-size: 0.64rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .lead-story {
@@ -216,9 +219,7 @@ a {
 .story-card,
 .market-card {
   padding: 1rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 12%, transparent), color-mix(in srgb, var(--theme-base) 3%, transparent)),
-    var(--paper-soft);
+  background: var(--card-surface);
   border: 1px solid var(--rule);
   border-radius: 1rem;
 }
@@ -257,15 +258,15 @@ a {
   align-content: start;
   gap: 0.75rem;
   min-height: 100%;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--paper-soft) 88%, white),
-      color-mix(in srgb, var(--paper-strong) 78%, white)
-    );
+  background: var(--card-surface);
 }
 
-.market-card h3,
+.market-card h3 {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
 .story-card h3,
 .calendar-list h3,
 .signal-strip h3 {
@@ -308,9 +309,7 @@ a {
   break-inside: avoid;
   margin-bottom: 1.2rem;
   padding: 1rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 4%, rgba(23, 19, 18, 0.03)), rgba(23, 19, 18, 0)),
-    var(--paper-soft);
+  background: var(--card-surface);
   border: 1px solid var(--rule);
   border-radius: 1rem;
 }
@@ -332,9 +331,7 @@ a {
 }
 
 .story-card {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 4%, rgba(23, 19, 18, 0.03)), rgba(23, 19, 18, 0)),
-    var(--paper-soft);
+  background: var(--card-surface);
 }
 
 .calendar-list,
@@ -345,9 +342,7 @@ a {
 .calendar-list article,
 .signal-strip article {
   padding: 1rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 4%, rgba(23, 19, 18, 0.03)), rgba(23, 19, 18, 0)),
-    var(--paper-soft);
+  background: var(--card-surface);
   border: 1px solid var(--rule);
   border-radius: 1rem;
 }

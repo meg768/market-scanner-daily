@@ -37,6 +37,12 @@ def main() -> int:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument(
+        "--page",
+        choices=["index", "design-preview"],
+        default="index",
+        help="Choose which HTML page to open by default.",
+    )
+    parser.add_argument(
         "--no-open",
         action="store_true",
         help="Start the local server without opening a browser window.",
@@ -47,9 +53,14 @@ def main() -> int:
     os.chdir(repo_root)
 
     server = ThreadingHTTPServer((args.host, args.port), SimpleHTTPRequestHandler)
-    url = f"http://{args.host}:{args.port}/daily-page/index.html"
+    page_name = f"{args.page}.html"
+    url = f"http://{args.host}:{args.port}/daily-page/{page_name}"
+    design_url = f"http://{args.host}:{args.port}/daily-page/design-preview.html"
+    live_url = f"http://{args.host}:{args.port}/daily-page/index.html"
 
     print(f"Serving Market Scanner Daily at {url}")
+    print(f"Live scan page: {live_url}")
+    print(f"Design preview page: {design_url}")
     print("Press Ctrl+C to stop the server.")
 
     if not args.no_open:
