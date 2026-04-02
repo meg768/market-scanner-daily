@@ -1,44 +1,42 @@
 # Market Scanner Daily
 
-Market Scanner Daily is a Codex-driven workflow for producing a daily global market scan focused on abnormal moves, catalyst trades, and special situations.
+Market Scanner Daily is a Codex-driven workspace for producing a daily world-markets paper centered on abnormal moves, catalyst trades, and special situations.
 
-The project is designed to work more like an early-warning market paper than a generic news recap. It starts from market-generated signals, then uses reporting and official releases to explain what changed and why it matters.
+It is built to function more like an early-warning system than a generic market recap. The workflow starts with market behavior, asks what looks unusual, and only then uses reporting or official releases to explain what changed and why it matters.
 
-It can also be used as a market analysis sounding board: a place to test interpretations, discuss trends, compare narratives across asset classes, and think through whether a move looks temporary, structural, or early.
+The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
 
-## What This Project Does
+## What This Project Is For
 
-- Scans global markets for bigger-than-normal moves across equities, rates, FX, commodities, and crypto
-- Prioritizes special situations such as M&A, restructurings, financing stress, regulatory shocks, and squeezes
-- Looks for early signs that macro, policy, geopolitical, sector, or company narratives are changing
-- Can be used as a sounding board for market analysis and trend discussion, not only as a one-way daily scan
-- Presents the result in a fixed newspaper-style format in chat
-- Stores durable workflow rules, preferences, and recurring source choices in the project memory
+- Spot bigger-than-normal moves across equities, rates, FX, commodities, and crypto
+- Surface special situations such as M&A, restructurings, financing stress, squeezes, and regulatory shocks
+- Identify early signs that macro, policy, geopolitical, sector, or company narratives are shifting
+- Present the result in a fixed newspaper-style format in chat
+- Keep durable workflow preferences and recurring rules in the project memory for future scans
 
-## Core Scanning Logic
+## Signal-First Scanning Logic
 
-The scan should begin from market behavior rather than from the headline flow.
+The scanner does not begin with the normal headline flow. It begins with the market asking:
 
-The first screen focuses on:
+- What moved?
+- How large was the move?
+- Was volume abnormal?
+- Is volatility confirming or contradicting the move?
+- Is the behavior confirmed across related assets, sectors, or regions?
+- Does the pattern look like new information, positioning stress, or a regime shift?
+
+The first screen prioritizes:
 
 - `USO` for oil direction, move size, and volume
 - `VIXY` for volatility direction, move size, and volume
 - `SPY` for broad U.S. equity direction, move size, and volume
 - Major U.S. sector indexes or sector ETFs for breadth and divergence
 
-For each core screen, the workflow asks:
+After that first-pass screen, the workflow uses current reporting and official releases to confirm the likely catalyst.
 
-- Is the price move unusual relative to normal behavior?
-- Is trading volume unusual?
-- Is volatility confirming the move?
-- Is the move confirmed across related assets or regions?
-- Does the behavior suggest new information, positioning stress, or a regime shift?
+## Daily Paper Format
 
-Only after that first-pass screen does the workflow use current reporting and official releases to confirm the likely catalyst.
-
-## Output Format
-
-Each scan should use the same section order:
+Every market paper uses the same section order:
 
 1. `Market Scanner Daily`
 2. Date line
@@ -52,66 +50,100 @@ Each scan should use the same section order:
 10. `What Matters Most`
 11. `Sources`
 
-The result is meant to read like a concise market newspaper: overview first, then the most important cross-asset moves, then catalyst names and interpretation.
+The aim is a concise market newspaper: overview first, then the most important cross-asset moves, then the situations and catalysts that deserve follow-up.
 
-## How To Use It
+## First-Time Codex Setup
 
-Open the project in Codex and use short prompts such as:
+If you are new to Codex, use this simple step-by-step flow.
+
+### 1. Get access to Codex
+
+- Make sure you have a ChatGPT plan that includes Codex
+- If needed, upgrade your plan in your ChatGPT account settings
+
+### 2. Install Codex
+
+For this project, the easiest path is the Codex app:
+
+- Download and install the Codex app for your operating system
+- Open the app
+- Sign in with your ChatGPT account when prompted
+
+If you prefer the terminal, you can also install the Codex CLI:
+
+```bash
+npm install -g @openai/codex
+```
+
+Then start it by running:
+
+```bash
+codex
+```
+
+### 3. Open this project in Codex
+
+Once Codex is installed and you are signed in:
+
+- Open Codex
+- Choose to open a local folder or project
+- Select this repository folder: `market-scanner-daily`
+- Wait for Codex to load the workspace context
+
+### 4. Start with a simple first prompt
+
+When the project is open, begin with one of these:
 
 - `scan`
 - `What's new?`
 - `help`
-- `how does this work?`
-- `what do you do?`
+
+### 5. Keep it simple at the start
+
+Recommended first workflow:
+
+1. Open the project
+2. Type `help` if you want a quick explanation of how the scanner works
+3. Type `scan` or `What's new?` to generate the latest market paper
+4. Ask follow-up questions such as `What changed versus yesterday?`
+
+### 6. What Codex will do in this repo
+
+When used correctly in this workspace, Codex should:
+
+- Read the project memory and operating context first
+- Run a fresh market scan when you ask for one
+- Present the result directly in chat
+- Keep using the same fixed newspaper-style structure
+
+## Using The Workspace
+
+Open the repo in Codex and use short prompts such as:
+
+- `scan`
+- `What's new?`
+- `help`
 
 Expected behavior:
 
-- `scan` or `What's new?` runs a fresh market scan immediately
-- The scan is presented directly in chat
-- The same workspace can also be used interactively to analyze market moves and discuss emerging trends
-- The workflow does not save each scan as a separate dated Markdown file
-- Durable rules, preferences, source choices, and lasting insights can be written back into the project memory
+- `scan` or `What's new?` runs a fresh scan for the current day
+- The paper is presented directly in chat
+- The layout stays fixed even when the market is quiet
+- Later same-day updates should revise `Edition status` instead of changing the structure
+- Scans are generated fresh in chat rather than saved as separate dated Markdown files
 
-## What `help` Should Explain
+## Market Analysis Mode
 
-When a user asks `help`, `how does this work?`, or `what do you do?`, the assistant should explain the workflow in plain English.
+This workspace is not limited to one-way daily scans. It can also be used as a sounding board for market interpretation.
 
-That explanation should cover:
+Examples:
 
-- The project is designed to scan world markets for special situations, catalyst trades, and bigger-than-normal moves
-- The workflow starts from market-generated signals rather than generic headlines
-- The first screen checks `USO`, `VIXY`, `SPY`, and major U.S. sector indexes or sector ETFs
-- Those moves should be judged against recent normal behavior when possible, not only by absolute size
-- The likely catalyst should then be confirmed with current reporting and official releases
-- The result is delivered in a fixed newspaper-style format in chat
-- The project can also be used as a sounding board for market analysis, trend discussion, and cross-asset interpretation
-
-The `help` response should keep the explicit command list minimal:
-
-- `scan`
-- `help`
-
-Even if they are not listed in that short command list, the assistant should still understand prompts such as `What's new?` as requests for a fresh scan.
-
-## How To Ask For Analysis
-
-The project is not limited to one-way daily scans. It can also be used as an interactive market discussion workspace.
-
-Examples of useful prompts:
-
-- `What is the most important trend in markets right now?`
-- `Is this move in oil confirming or contradicting equities?`
 - `What changed versus yesterday?`
+- `Is oil confirming or contradicting equities here?`
 - `Does this look like positioning stress or new information?`
 - `Which sectors are confirming the macro narrative?`
 
-In these cases, the assistant should act as a market analysis partner, using the same signal-first framework that powers the daily scan.
-
-## Project Files
-
-- `AGENTS.md`: project-level instructions that tell Codex how to start each session
-- `CONTEXT.md`: the project memory and operating playbook for the scanner
-- `README.md`: human-facing overview of what the project is and how it works
+In those cases, the same signal-first framework should guide the analysis.
 
 ## Source Philosophy
 
@@ -119,24 +151,30 @@ The workflow prefers:
 
 - Market-generated signals first
 - Same-day reporting second
-- Official releases and investor-relations sources when timing or confirmation matters
+- Official releases, calendars, and investor-relations material when confirmation matters
 
-Reuters is the default same-day reporting backbone when relevant, with official calendars and primary releases used for confirmation and catalyst timing.
+Reuters is the default same-day reporting backbone when relevant, with primary releases used to confirm timing, policy, and catalysts.
 
 ## Customization
 
-The scanner is intentionally configurable. The user can change:
+The scanner is intentionally configurable. Durable changes can be made to:
 
 - Markets and regions covered
 - Asset classes prioritized
 - Signal thresholds
 - Output length and tone
-- Whether to include interpretation or trade framing
 - Source preferences
 - Watchlists and recurring situations
+- How the paper is displayed or updated
 
-Those durable changes should be reflected in the project memory so future scans follow the updated workflow.
+Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
 
-## Documentation Rule
+## Repository Layout
 
-All project documentation should be kept in English.
+- `AGENTS.md` sets project-level operating instructions for Codex
+- `CONTEXT.md` stores the project memory and scanning workflow
+- `README.md` is the human-facing overview
+
+## Documentation Standard
+
+All project documentation should remain in English.
