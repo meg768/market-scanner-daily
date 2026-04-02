@@ -1,4 +1,4 @@
-# Market Scanner Chat
+# Market Scanner Daily
 
 ## Purpose
 
@@ -204,38 +204,6 @@ Formatting rules for the daily paper:
 Use this prompt for future scans:
 
 > Give me an overview of today in world markets, focused on special situations, catalyst trades, and bigger-than-normal moves in global assets and equities. Prioritize early signals of change in the world. Structure it as: Executive Summary, Cross-Asset Dashboard, Abnormal Moves, Special Situations, Catalyst Calendar, Early-Info Signals, and What Matters Most.
-
-## Initial Snapshot: March 31, 2026
-
-Primary market driver:
-
-- Middle East war risk remained the dominant macro driver
-- markets traded a relief rally on de-escalation headlines
-- oil stayed extremely elevated, which kept inflation and policy stress in focus
-
-Key takeaways from the first scan:
-
-- the U.S. equity bounce looked like relief, not clean risk-on
-- oil was the standout abnormal move
-- Asia and parts of EM looked weaker than the U.S. headline tape suggested
-- gold was bouncing on the day, but the larger monthly message was rate-cut repricing and macro stress
-- Europe faced renewed inflation pressure from energy
-
-Named situations from the first scan:
-
-- Unilever / McCormick combination talks
-- CoreWeave strength after financing news
-- Marvell strength tied to Nvidia investment
-- Constellation Energy weakness after a softer 2026 outlook
-
-Durable insights from April 1, 2026:
-
-- the first true relief signal came from oil reversing lower, not from a new growth narrative
-- when oil falls, travel, banks, and cyclicals can rally sharply while energy lags; this sector rotation is an important confirmation signal
-- a falling VIX only matters if the level also normalizes; direction alone is not enough
-- gold holding firm during an equity rally can signal that macro hedging is still active beneath the relief tape
-- if ISM stays firm while oil falls, equities can keep rallying without a clean recession story; this is a relief-plus-resilience setup, not a normal expansion signal
-- potential IEA reserve action is an important policy overlay even on down-oil days, because physical supply risk can stay elevated after spot panic fades
 
 ## Working Rules
 
