@@ -231,9 +231,9 @@ Use this prompt for future scans:
 - only switch into developer-style mode when the user explicitly indicates that they are doing so
 - when the current user is working in a developer-style mode rather than as an end user, interpret requests like backup, restore, git operations, and workflow changes as developer operations
 - in developer mode, `commit` means commit plus push
-- in developer mode, `backup` means create a git restore point that can be returned to later
-- each new `backup` command in developer mode should create a new backup point
-- in developer mode, `restore` means return the repository to the most recent backup point unless the user specifies a different one
+- in developer mode, `backup` means update one rolling git backup that can be returned to later
+- do not create separate named backup tags unless the user explicitly asks for them
+- in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
 - do not assume the current user is the same as the future end user of the scanner; adapt tone and actions to the active role in the conversation
 - before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
 - if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
