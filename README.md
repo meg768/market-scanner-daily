@@ -89,6 +89,17 @@ Current intent:
 - when available, the chat edition should include a short `Today's Edition` section under the title and date, linking to the HTML page with a concise label such as `Open in Browser` before the normal text version
 - when the local preview workflow is active, a normal `scan` request may also open the HTML companion in the browser automatically alongside the chat edition
 
+Example after a scan:
+
+- chat shows the normal daily paper in markdown
+- the `Today's Edition` section links to the HTML companion
+- the HTML page presents the same scan in a more readable newspaper-style layout
+- a typical edition includes a masthead, a lead story, sidebar summary boxes, and the same sections as the chat paper
+
+Example file:
+
+- `daily-page/index.html`
+
 ## First-Time Codex Setup
 
 If you are new to Codex, use this simple step-by-step flow.
@@ -214,6 +225,7 @@ Those changes should be preserved in the project memory so future scans follow t
 - Added a `Today's Edition` companion link in the chat paper format for the HTML page
 - Added a single-color HTML theme system based on `--theme-base` for easier retheming
 - Added a workflow rule that meaningful commits should also update this `Change Log`
+- Added a concrete README example showing how the HTML edition relates to a completed scan
 
 ## Repository Layout
 
