@@ -6,6 +6,8 @@ It is built to function more like an early-warning system than a generic market 
 
 The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
 
+> Work in progress: this project is still being actively shaped, and parts of the workflow, documentation, and presentation may continue to evolve.
+
 ## What This Project Is For
 
 - Spot bigger-than-normal moves across equities, rates, FX, commodities, and crypto
