@@ -14,6 +14,7 @@ The same workspace can also be used as a market-analysis partner for testing nar
 - Surface special situations such as M&A, restructurings, financing stress, squeezes, and regulatory shocks
 - Identify early signs that macro, policy, geopolitical, sector, or company narratives are shifting
 - Present the result in a fixed newspaper-style format in chat
+- Support a newspaper-style HTML page using the same daily structure
 - Keep durable workflow preferences and recurring rules in the project memory for future scans
 
 ## Signal-First Scanning Logic
@@ -52,6 +53,38 @@ Every market paper uses the same section order:
 10. `Sources`
 
 The aim is a concise market newspaper: overview first, then the most important cross-asset moves, then the situations and catalysts that deserve follow-up.
+
+The same editorial structure can also be presented as an HTML page for a more visually polished, newspaper-like reading experience.
+
+The HTML presentation does not need to mimic any one newspaper exactly. It can use a more creative editorial design as long as the structure stays clear and readable.
+
+Its theme should also be easy to retune: the HTML CSS is designed around one top-level base color so the overall page theme can be changed from a single place.
+
+## HTML Daily Page
+
+The project now includes a newspaper-style HTML prototype in:
+
+- `daily-page/index.html`
+- `daily-page/serve.py`
+
+That page keeps the same daily section order while presenting it in a more editorial layout.
+
+For browser preview, start the local preview server:
+
+- macOS: `python3 daily-page/serve.py`
+- Windows: `python daily-page/serve.py`
+
+The script serves the page on localhost and attempts to open it automatically in your browser.
+
+To retheme the HTML edition, change the `--theme-base` value near the top of `daily-page/styles.css`.
+
+Current intent:
+
+- chat remains the default output
+- the HTML page is a companion presentation layer
+- the structure stays aligned with the main daily scan format
+- when available, the chat edition should include a short `Today's Edition` section under the title and date, linking to the HTML page with a concise label such as `Open in Browser` before the normal text version
+- when the local preview workflow is active, a normal `scan` request may also open the HTML companion in the browser automatically alongside the chat edition
 
 ## First-Time Codex Setup
 
@@ -120,6 +153,7 @@ Open the repo in Codex and use short prompts such as:
 Expected behavior:
 
 - `scan` or `What's new?` runs a fresh scan for the current day
+- when the HTML companion is available, `scan` also includes the browser link automatically near the top
 - `help`, `how does this work?`, or `what do you do?` explains how the scanner works
 - The paper is presented directly in chat
 - The layout stays fixed even when the market is quiet
@@ -172,12 +206,14 @@ Those changes should be preserved in the project memory so future scans follow t
 - Added a direct GitHub ZIP download link for opening the project without Git
 - Simplified onboarding to focus on the Codex app instead of the CLI
 - Updated the scan workflow description so each `scan` request is treated as a new scan in chat
+- Added a newspaper-style HTML daily page prototype with the same editorial structure
 
 ## Repository Layout
 
 - `AGENTS.md` sets project-level operating instructions for Codex
 - `CONTEXT.md` stores the project memory and scanning workflow
 - `README.md` is the human-facing overview
+- `daily-page/` contains the newspaper-style HTML presentation prototype
 
 When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
 
