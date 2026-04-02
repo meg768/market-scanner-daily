@@ -226,6 +226,7 @@ Use this prompt for future scans:
 - display the scan content directly in the conversation in a readable newspaper-style markdown layout
 - a scan request should trigger a fresh scan immediately without asking whether to preserve or reuse a prior version
 - when the user updates the workflow or presentation, record the new rule in this memory file
+- when methods, analyses, short commands, or usage patterns change in this memory file, mirror the user-facing parts of that change in `README.md`
 - before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
 - if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
 

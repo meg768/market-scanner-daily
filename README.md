@@ -88,6 +88,8 @@ When the project is open, begin with one of these:
 - `scan`
 - `What's new?`
 - `help`
+- `how does this work?`
+- `what do you do?`
 
 ### 5. Keep it simple at the start
 
@@ -118,10 +120,12 @@ Open the repo in Codex and use short prompts such as:
 Expected behavior:
 
 - `scan` or `What's new?` runs a fresh scan for the current day
+- `help`, `how does this work?`, or `what do you do?` explains how the scanner works
 - The paper is presented directly in chat
 - The layout stays fixed even when the market is quiet
 - Each scan request creates a new scan in chat
 - The scan uses the same fixed structure each time
+- Scans are generated in chat rather than saved as separate dated Markdown files
 
 ## Market Analysis Mode
 
@@ -174,6 +178,8 @@ Those changes should be preserved in the project memory so future scans follow t
 - `AGENTS.md` sets project-level operating instructions for Codex
 - `CONTEXT.md` stores the project memory and scanning workflow
 - `README.md` is the human-facing overview
+
+When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
 
 ## Documentation Standard
 
