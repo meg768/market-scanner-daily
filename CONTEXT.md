@@ -44,6 +44,7 @@ Preferred output style:
 - when helpful, the same daily structure may also be rendered as a newspaper-style HTML page, but the chat edition remains the default output
 - the HTML companion does not need to imitate any specific newspaper exactly; it may use a more creative editorial layout as long as the section order and readability stay strong
 - the HTML companion should use a single top-level base color in its CSS theme layer so the overall visual theme can be changed easily from one place
+- the HTML companion should reflect the same real information as the in-chat `scan`; it is a presentation layer, not a separate editorial version
 - keep all project documentation in English
 - when the user changes how data should be fetched, stored, or presented, save that instruction in this memory file
 - future behavior should follow the current contents of this memory file, not hard-coded assumptions that may become outdated
@@ -202,6 +203,7 @@ Formatting rules for the daily paper:
 - use the same newspaper-style markdown presentation in chat every day
 - each scan request should produce a new scan rather than revising an earlier one
 - if an HTML version is created, preserve the same section order and overall editorial logic there as well
+- if an HTML version is created, keep it aligned with the factual content of the current `scan` rather than letting the HTML page drift into its own separate summary
 - if a companion HTML page exists, place its link below the `Market Scanner Daily` title and the date line in a short `Today's Edition` section using a concise label such as `Open in Browser`, then continue with the normal text version in chat
 - when a local HTML preview server is available, prefer a `http://127.0.0.1:8765/daily-page/index.html` style link over a local file link so clicks open in a browser rather than Finder
 - when the user types `scan`, treat the HTML companion link as automatic when available rather than optional; include it in the `Today's Edition` section by default

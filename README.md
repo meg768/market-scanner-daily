@@ -60,6 +60,8 @@ The HTML presentation does not need to mimic any one newspaper exactly. It can u
 
 Its theme should also be easy to retune: the HTML CSS is designed around one top-level base color so the overall page theme can be changed from a single place.
 
+The HTML page is meant to reflect the same underlying scan content as the chat edition. It is a more readable presentation layer, not a separate version with different facts or conclusions.
+
 ## HTML Daily Page
 
 The project now includes a newspaper-style HTML prototype in:
@@ -82,6 +84,7 @@ Current intent:
 
 - chat remains the default output
 - the HTML page is a companion presentation layer
+- it should mirror the same actual scan content rather than becoming its own separate summary
 - the structure stays aligned with the main daily scan format
 - when available, the chat edition should include a short `Today's Edition` section under the title and date, linking to the HTML page with a concise label such as `Open in Browser` before the normal text version
 - when the local preview workflow is active, a normal `scan` request may also open the HTML companion in the browser automatically alongside the chat edition
