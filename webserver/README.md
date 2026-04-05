@@ -1,8 +1,8 @@
-# Server Track
+# Webserver Track
 
 This folder contains the newer web-published Market Scanner Daily implementation.
 
-It is the server/app track that was added on top of the older repository contents. The goal of this folder is to keep the newer runtime isolated from the older design and preview material that still lives at the repo root and under `daily-page/`.
+It is the webserver/app track that was added on top of the older repository contents. The goal of this folder is to keep the newer runtime isolated from the older root-side newspaper companion that still lives under `daily-page/`.
 
 ## What Lives Here
 
@@ -14,7 +14,7 @@ It is the server/app track that was added on top of the older repository content
 - `scripts/`: helper scripts such as manual edition refresh
 - `ecosystem.config.cjs`: PM2 config for the Raspberry Pi deployment
 - `package.json`: scripts for running the server track locally
-- `vercel.json`: deployment config for this server/app track
+- `vercel.json`: deployment config for this webserver/app track
 
 ## What This Folder Is For
 
@@ -30,10 +30,10 @@ Do not use this folder for the older design-preview-only flow unless you explici
 
 ## How To Work In This Folder
 
-Run commands from this folder when working on the newer server/app track:
+Run commands from this folder when working on the newer webserver/app track:
 
 ```bash
-cd server
+cd webserver
 npm run dev
 ```
 
@@ -54,4 +54,4 @@ The repo root still contains:
 This means the repo now intentionally contains two layers:
 
 - the older root/design layer
-- the newer `server/` app layer
+- the newer `webserver/` app layer

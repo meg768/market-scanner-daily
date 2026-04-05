@@ -6,7 +6,7 @@ It is built to function more like an early-warning system than a generic market 
 
 The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
 
-The main project is the interactive Codex-driven scanning workflow. In addition to that main path, the repo also includes a separate optional server feature in `server/` for web publishing experiments.
+The main project is the interactive Codex-driven scanning workflow. In addition to that main path, the repo also includes a separate optional webserver feature in `webserver/` for web publishing experiments.
 
 > Work in progress: this project is still being actively shaped, and parts of the workflow, documentation, and presentation may continue to evolve.
 
@@ -110,13 +110,13 @@ Example file:
 
 - `daily-page/2026-04-05.html`
 
-## Optional Server Feature
+## Optional Webserver Feature
 
-The repo also contains a separate `server/` folder.
+The repo also contains a separate `webserver/` folder.
 
 That folder is not the main interactive product. It is an extra feature that packages the newspaper output as a web-published server/app experiment.
 
-Use `server/` when you want to work on:
+Use `webserver/` when you want to work on:
 
 - a standalone HTML/JSON server version
 - the published-edition pipeline
@@ -130,9 +130,9 @@ Use the repo root when you want to work on:
 - the HTML prototype under `daily-page/`
 - the Codex-first usage model
 
-For details about the server feature itself, see:
+For details about the webserver feature itself, see:
 
-- `server/README.md`
+- `webserver/README.md`
 
 ## Developer Workflow
 
@@ -260,7 +260,7 @@ Those changes should be preserved in the project memory so future scans follow t
 
 ### April 5, 2026
 
-- Moved the web-published experiment into a separate optional `server/` folder
+- Moved the web-published experiment into a separate optional `webserver/` folder
 - Re-centered the root project memory on the interactive Codex-driven scan workflow
 - Simplified `daily-page/` to one real template, one dated generated edition, and one shared stylesheet
 - Switched the local HTML companion naming convention to `YYYY-MM-DD.html`
@@ -295,13 +295,13 @@ Those changes should be preserved in the project memory so future scans follow t
 - `CONTEXT.md` stores the interactive project memory and scanning workflow
 - `README.md` is the human-facing overview of the whole project
 - `daily-page/` contains the local HTML companion and its template-driven layout files
-- `server/` contains the separate optional server/app feature
+- `webserver/` contains the separate optional webserver/app feature
 
 Documentation split:
 
 - `CONTEXT.md` should describe the interactive main workflow
-- `README.md` should describe the whole project, including optional features such as `server/`
-- `server/README.md` should document the server feature itself
+- `README.md` should describe the whole project, including optional features such as `webserver/`
+- `webserver/README.md` should document the webserver feature itself
 
 When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
 
