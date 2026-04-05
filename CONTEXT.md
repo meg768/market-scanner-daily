@@ -268,12 +268,21 @@ Use this section when the current user is working on the project itself rather t
 - in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
 - when doing HTML design work without asking for a live scan, use `daily-page/template.html` with small isolated changes rather than maintaining a separate preview page
 - for HTML design iteration in developer mode, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
-- in developer mode, publishing the HTML companion to the Raspberry Pi is a separate maintenance workflow, not part of normal use mode
-- the simple publish target for the HTML companion is the Raspberry Pi folder `/var/www/html/market-scanner-daily`
-- when publishing to the Raspberry Pi, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
-- do not create a repo script for that publish step; the copy instructions should live in the automation that runs the scan
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
 - current preferred HTML direction in developer mode: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
+
+## Server Mode
+
+Use this section when the current user or automation is acting as the publishing server rather than as a human end user or project developer.
+
+- only switch into server mode when the user explicitly indicates that they are doing so, for example by saying `server mode`
+- server mode is for production-like scan execution and publishing, not for design work or project maintenance
+- in server mode, run the normal scan logic using the same project memory and fixed output structure as user mode
+- in server mode, update both `daily-page/YYYY-MM-DD.html` for the current scan date and `daily-page/latest.html`
+- in server mode, the simple publish target for the HTML companion is the Raspberry Pi folder `/var/www/html/market-scanner-daily`
+- when publishing to the Raspberry Pi in server mode, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
+- in server mode, do not stop to ask follow-up questions unless there is a real blocker
+- do not create a repo script for the publish step; the copy instructions should live in the automation or server-mode command that runs the scan
 
 ## Recurring Source Set
 

@@ -123,13 +123,13 @@ When working on the HTML presentation in developer mode, edit the real template 
 - Prefer small, isolated style changes during design work
 - Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
 
-Optional publish workflow in developer mode:
+Optional publish workflow in server mode:
 
 - keep the editable scan output in `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html`
 - publish `daily-page/latest.html` to the Raspberry Pi as `/var/www/html/market-scanner-daily/latest.html`
 - publish the matching dated file to the same Raspberry Pi folder as an archive copy
 - keep those copy instructions in the automation itself rather than in a repo script
-- publishing is treated as a developer-mode task, not a normal end-user action
+- publishing is treated as a server-mode task, not a normal end-user action
 - if someone tries to publish in user mode, the workflow should simply state that publishing is not available there
 
 Published Raspberry Pi path:
@@ -261,8 +261,8 @@ Those changes should be preserved in the project memory so future scans follow t
 - Added `daily-page/latest.html` as the rolling current-edition companion file
 - Inlined the HTML companion styling into the template and generated editions so each file is self-contained
 - Updated the local HTML workflow so scans point to the `daily-page/` folder instead of direct file links
-- Moved Raspberry Pi publishing into developer mode and blocked publishing in user mode
-- Reframed the project memory around developer mode and user mode, replacing the older handoff-style terminology
+- Added `server mode` as the dedicated role for automated scan generation and Raspberry Pi publishing
+- Blocked publishing in user mode and kept developer mode focused on project maintenance instead
 
 ### April 3, 2026
 
