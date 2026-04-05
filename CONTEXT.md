@@ -308,6 +308,9 @@ Use this section when the current user or automation is acting as the publishing
 - in server mode, once the edition text is coherent, write `daily-page/YYYY-MM-DD.html`, write `daily-page/latest.html`, and publish immediately
 - in server mode, prefer a complete good edition over a slower or incomplete "perfect" edition
 - in server mode, if a run cannot finish the full scan, it should still prefer publishing a concise complete edition over publishing nothing
+- in server mode, commands should be callable with the shortest practical prompt surface
+- if the prompt says `server mode` and then names a known server-mode command, treat that command name as the full instruction and rely on this memory file for the detailed behavior
+- do not require a long repeated production brief once the command name is established here
 
 Server-mode production brief:
 
@@ -320,6 +323,24 @@ Server-mode production brief:
 - if one detail is missing, omit it rather than continuing to search
 - once the regime read is clear, stop researching and write the edition
 - success in server mode means the dated HTML file is updated, `latest.html` is updated, and both files are published
+
+Server-mode commands:
+
+- `scan_publish`
+  - meaning: run a fresh current market scan in server mode, write `daily-page/YYYY-MM-DD.html`, write `daily-page/latest.html`, then publish both files to `/var/www/html/market-scanner-daily/`
+  - source budget: use a very small fixed source set
+  - tape focus: center the tape check on `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
+  - source mix: use one or two official sources for exact timing or macro confirmation and one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
+  - stopping rule: once the edition is coherent, stop researching and write the files
+  - fallback rule: if one small detail is still missing, omit it instead of stalling the run
+  - success rule: the run succeeds only when the HTML files are updated and the Raspberry Pi copies are published
+
+Shortest recommended server-mode prompt:
+
+- `server mode scan_publish`
+  - treat this as a complete production instruction
+  - do not ask for the long-form workflow again
+  - use the server-mode production brief and the `scan_publish` command definition automatically
 
 ## Recurring Source Set
 

@@ -168,6 +168,22 @@ Server-mode production rules:
 - if one small detail is missing, omit it instead of stalling the run
 - success means `daily-page/YYYY-MM-DD.html`, `daily-page/latest.html`, and the Raspberry Pi copies are updated
 
+Server-mode command:
+
+- `scan_publish`
+  - runs a fresh current market scan in server mode
+  - updates `daily-page/YYYY-MM-DD.html`
+  - updates `daily-page/latest.html`
+  - publishes both files to `/var/www/html/market-scanner-daily/`
+
+The idea is that server-side commands should stay short. The detailed behavior belongs in the project memory under server mode, while the actual command only needs to invoke server mode and the command name.
+
+Shortest recommended server-side prompt:
+
+- `server mode scan_publish`
+
+That short prompt is intended to be enough on its own. The detailed production behavior should come from the project memory rather than being repeated in every CLI invocation.
+
 ## First-Time Codex Setup
 
 If you are new to Codex, use this simple step-by-step flow.
@@ -296,6 +312,8 @@ Those changes should be preserved in the project memory so future scans follow t
 - Blocked publishing in user mode and kept developer mode focused on project maintenance instead
 - Reorganized the project memory around explicit `user mode`, `developer mode`, and `server mode` sections
 - Tightened the documented server-mode production rules so automation prioritizes finishing and publishing over open-ended research depth
+- Added a server-mode command pattern so Pi commands can stay short while the detailed production behavior lives in the project memory
+- Made `server mode scan_publish` the preferred short-form server-side prompt
 
 ### April 3, 2026
 
