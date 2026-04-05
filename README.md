@@ -262,6 +262,7 @@ Those changes should be preserved in the project memory so future scans follow t
 - Inlined the HTML companion styling into the template and generated editions so each file is self-contained
 - Updated the local HTML workflow so scans point to the `daily-page/` folder instead of direct file links
 - Moved Raspberry Pi publishing into developer mode and blocked publishing in user mode
+- Reframed the project memory around developer mode and user mode, replacing the older handoff-style terminology
 
 ### April 3, 2026
 

@@ -285,19 +285,9 @@ Use these recurring sources when relevant:
 - Federal Reserve calendars and FOMC schedules for minutes, Beige Book, and meeting dates
 - company investor-relations pages when same-day earnings timing or management commentary is part of the catalyst
 
-## Handoff Notes
-
-This project is meant to be portable.
-
-- this memory file is the project brain and should travel with the project
-- if the file is renamed before being shared, the renamed file still remains the source of truth
-- a new Codex project should read this memory file first and follow its workflow rules
-- scans are generated on demand in chat, while this memory file preserves durable intent, preferences, sources, and operating rules
-- when in doubt, prefer updating this memory file over hard-coding workflow behavior elsewhere
-
 ## Project Setup And Restart
 
-Use this workflow to make handoff and restart behavior reliable:
+Use this workflow to make restart behavior reliable:
 
 - create the Codex project from this folder so the assistant can access this file directly
 - keep `AGENTS.md` in the project root so Codex gets a native project instruction file
@@ -306,6 +296,8 @@ Use this workflow to make handoff and restart behavior reliable:
 - after a Codex restart or when starting a new thread in the same project, Codex should still follow `AGENTS.md` and then this file
 - if this file is renamed, update `AGENTS.md` to point to the renamed file instead
 - when updating workflow, sources, or presentation rules, update this file so future sessions inherit the change
+- scans are generated on demand in chat, while this memory file preserves durable intent, preferences, sources, and operating rules
+- when in doubt, prefer updating this memory file over hard-coding workflow behavior elsewhere
 
 Practical rule:
 
@@ -316,8 +308,8 @@ Practical rule:
 
 This section is intended for the person who will actually use the scanner day to day.
 
-The goal is that a future owner can change what gets scanned and how it is presented by editing this memory file, without needing to rewrite the workflow.
-The goal is that a future owner can change what gets scanned and how it is presented through prompts, while the assistant updates this memory file on their behalf.
+The goal is that a future developer can change what gets scanned and how it is presented by editing this memory file, without needing to rewrite the workflow.
+The goal is that a future developer can change what gets scanned and how it is presented through prompts, while the assistant updates this memory file on their behalf.
 
 ### Audience And Use Case
 
@@ -330,8 +322,8 @@ The assistant should gather this through conversation and store the answers here
 
 Current default assumption:
 
-- the current owner is helping a friend and is not a markets expert
-- the future primary reader may be much more knowledgeable about global markets
+- the developer may have limited direct knowledge of global markets
+- the end user may be much more knowledgeable about global markets
 
 ### Coverage Configuration
 
@@ -390,7 +382,7 @@ Suggested examples:
 - when a move must have a catalyst versus when the move alone is enough
 - what counts as a special situation
 
-These thresholds should be tailored to the active user's style. A professional reader may want tighter thresholds and more nuance. A beginner may want only the biggest moves.
+These thresholds should be tailored to the active user's style. An experienced market user may want tighter thresholds and more nuance. A beginner may want only the biggest moves.
 
 The assistant should help the user define these thresholds through prompts and then save the resulting preferences here.
 
@@ -420,9 +412,9 @@ Suggested preferences:
 - whether to favor fast reporting or official releases when they conflict
 - whether to include local-language sources if needed
 
-### Friend Onboarding Checklist
+### User Onboarding Checklist
 
-If this project is handed to a friend, the assistant should ask them to define:
+If this project is handed to a new user, the assistant should ask them to define:
 
 1. Which regions and markets should be scanned every day.
 2. Which asset classes matter most.
