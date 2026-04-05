@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{pageTitle}}</title>
+    <meta name="description" content="{{pageDescription}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <div class="masthead__rail">
+          {{railItems}}
+        </div>
+        <h1 class="masthead__title">{{title}}</h1>
+        <div class="masthead__meta">
+          <p class="masthead__date">{{dateLine}}</p>
+          <p class="masthead__tagline">{{tagline}}</p>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="front-page">
+          <div class="section-label">Front Page</div>
+          <div class="lead-story">
+            <p class="lead-story__kicker">Lead Story</p>
+            <h2 class="lead-story__headline">
+              <a href="{{leadLink}}" target="_blank" rel="noreferrer">
+                {{leadTitle}}
+              </a>
+            </h2>
+            <p class="lead-story__deck">
+              {{leadSummary}}
+            </p>
+            <div class="lead-story__body">
+              {{leadParagraphs}}
+            </div>
+          </div>
+
+          <aside class="front-page__sidebar">
+            <section class="brief-card">
+              <p class="brief-card__title">{{sidebarTitle}}</p>
+              <ul class="brief-list">
+                {{sidebarPoints}}
+              </ul>
+            </section>
+
+            <section class="brief-card">
+              <p class="brief-card__title">{{sidebarLinksTitle}}</p>
+              <div class="brief-links">
+                {{frontPageItems}}
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        {{sections}}
+
+        <section class="news-section">
+          <div class="section-label">{{whatMattersTitle}}</div>
+          <p class="section-summary">
+            {{whatMattersSummary}}
+          </p>
+          <ol class="wire-list">
+            {{whatMattersItems}}
+          </ol>
+        </section>
+
+        <section class="news-section news-section--sources">
+          <div class="section-label">Sources</div>
+          <p class="section-summary">
+            Primary market-data and confirming-reporting sources used in the current edition.
+          </p>
+          <ul class="source-link-list">
+            {{sources}}
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

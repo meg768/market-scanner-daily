@@ -44,11 +44,19 @@ body {
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  text-decoration: none;
 }
 
 .page-shell {
   width: min(1220px, calc(100vw - 2rem));
-  margin: 1.25rem auto;
+  margin: 1.25rem auto 1.9rem;
   padding: 1.25rem;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent 10%),
@@ -122,8 +130,8 @@ a {
 .masthead__tagline {
   margin: 0;
   max-width: 54ch;
-  font-size: 1.05rem;
-  line-height: 1.55;
+  font-size: 1.24rem;
+  line-height: 1.56;
   color: var(--muted);
   text-align: center;
 }
@@ -145,7 +153,7 @@ a {
 }
 
 .front-page {
-  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.9fr);
+  grid-template-columns: minmax(0, 1.9fr) minmax(260px, 0.78fr);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--theme-base) 8%, transparent), rgba(255, 255, 255, 0) 42%),
     rgba(255, 255, 255, 0.38);
@@ -180,21 +188,23 @@ a {
   line-height: 1.08;
   letter-spacing: -0.025em;
   font-weight: 600;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 .lead-story__deck {
   margin: 0 0 1.15rem;
-  font-size: 1.18rem;
-  line-height: 1.46;
+  font-size: 1.52rem;
+  line-height: 1.44;
   color: color-mix(in srgb, var(--theme-base) 20%, #27343d);
 }
 
 .lead-story__body {
-  columns: 2;
-  column-gap: 1.7rem;
-  font-size: 1rem;
-  line-height: 1.7;
+  columns: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.3rem;
+  line-height: 1.58;
 }
 
 .lead-story__body p {
@@ -233,8 +243,37 @@ a {
 .brief-card__text,
 .brief-list {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.68;
+  font-size: 1.18rem;
+  line-height: 1.58;
+}
+
+.brief-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.brief-links p {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.brief-links__source {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.brief-links__source:hover {
+  color: var(--accent-strong);
+}
+
+.brief-links__body {
+  line-height: 1.24;
 }
 
 .brief-list {
@@ -280,8 +319,8 @@ a {
 .calendar-list p,
 .signal-strip p {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.62;
+  font-size: 1.18rem;
+  line-height: 1.56;
 }
 
 .market-card__move {
@@ -322,16 +361,47 @@ a {
 
 .column-copy p {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.72;
+  font-size: 1.2rem;
+  line-height: 1.58;
 }
 
 .story-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.section-summary {
+  margin: -0.35rem 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.56;
+}
+
 .story-card {
   background: var(--card-surface);
+}
+
+.lead-story__headline a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.story-card__title {
+  margin: 0;
+  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
+  font-size: 1.22rem;
+  line-height: 1.56;
+}
+
+.story-card__source {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.lead-story__headline a:hover,
+.story-card__source:hover {
+  color: var(--accent-strong);
 }
 
 .calendar-list,
@@ -356,12 +426,91 @@ a {
 .matters-list li,
 .sources-list li {
   margin-bottom: 0.65rem;
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.2rem;
+  line-height: 1.58;
 }
 
-.news-section--sources {
+.wire-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.wire-list li {
+  display: grid;
+  gap: 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wire-list__title {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
+}
+
+.wire-list__summary {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  color: color-mix(in srgb, var(--theme-base) 18%, #2a3740);
+}
+
+.wire-list li:last-child {
   border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.wire-list__source {
+  margin-bottom: 0.28rem;
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.wire-list__source:hover {
+  color: var(--accent-strong);
+}
+
+.wire-list span {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.source-link-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem 1.2rem;
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.source-link-list li {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.58;
+}
+
+.source-link-list a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.source-link-list a:hover {
+  color: var(--accent-strong);
 }
 
 @media (max-width: 1140px) {
@@ -377,7 +526,7 @@ a {
 @media (max-width: 860px) {
   .page-shell {
     width: min(100vw, calc(100vw - 0.8rem));
-    margin: 0.4rem auto;
+    margin: 0.4rem auto 1rem;
     padding: 0.6rem;
   }
 
