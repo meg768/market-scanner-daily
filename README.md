@@ -6,7 +6,7 @@ It is built to function more like an early-warning system than a generic market 
 
 The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
 
-The main project is the interactive Codex-driven scanning workflow. In addition to that main path, the repo also includes a separate optional webserver feature in `webserver/` for web publishing experiments.
+The main project is the interactive Codex-driven scanning workflow.
 
 > Work in progress: this project is still being actively shaped, and parts of the workflow, documentation, and presentation may continue to evolve.
 
@@ -73,6 +73,7 @@ Section labels such as `Front Page` and `Cross-Asset Dashboard` should appear as
 The project now includes a newspaper-style HTML prototype in:
 
 - `daily-page/YYYY-MM-DD.html`
+- `daily-page/latest.html`
 - `daily-page/template.html`
 
 The root-side HTML companion is intended to mirror the same scan content as chat while remaining easy to open locally.
@@ -81,14 +82,16 @@ Normal local flow:
 
 - fill `daily-page/template.html` with the current scan content
 - write the readable companion page to `daily-page/YYYY-MM-DD.html` using the scan date
+- write the same content to `daily-page/latest.html`
 - overwrite that dated file if it already exists for the same day
+- overwrite `daily-page/latest.html` on every new scan
 - open the `daily-page/` folder from Finder / File Explorer and click the dated file there
 
 That keeps the HTML edition reproducible without depending on Node, Python, or a preview server.
 
-For layout iteration, edit `daily-page/template.html` and `daily-page/styles.css` directly so the real local edition stays as the single layout source.
+For layout iteration, edit `daily-page/template.html` directly so the real local edition stays as the single source of both layout and styling.
 
-To retheme the generated HTML edition, change the `--theme-base` value near the top of `daily-page/styles.css`.
+To retheme the generated HTML edition, change the `--theme-base` value near the top of the inline `<style>` block in `daily-page/template.html`.
 
 Current intent:
 
@@ -97,7 +100,7 @@ Current intent:
 - it should mirror the same actual scan content rather than becoming its own separate summary
 - the structure stays aligned with the main daily scan format
 - when available, the chat edition should include a short `Today's Edition` section under the title and date, pointing to the `daily-page/` folder before the normal text version
-- the normal `scan` workflow should keep `daily-page/template.html` and the matching `daily-page/YYYY-MM-DD.html` file aligned with the same edition structure
+- the normal `scan` workflow should keep `daily-page/template.html`, the matching `daily-page/YYYY-MM-DD.html` file, and `daily-page/latest.html` aligned with the same edition structure
 
 Example after a scan:
 
@@ -109,39 +112,30 @@ Example after a scan:
 Example file:
 
 - `daily-page/2026-04-05.html`
-
-## Optional Webserver Feature
-
-The repo also contains a separate `webserver/` folder.
-
-That folder is not the main interactive product. It is an extra feature that packages the newspaper output as a web-published server/app experiment.
-
-Use `webserver/` when you want to work on:
-
-- a standalone HTML/JSON server version
-- the published-edition pipeline
-- deployment-oriented work such as PM2, Apache, or scheduled republishes
-- a more app-like version of the newspaper outside the normal interactive Codex flow
-
-Use the repo root when you want to work on:
-
-- the interactive daily scan behavior
-- the project memory and workflow rules
-- the HTML prototype under `daily-page/`
-- the Codex-first usage model
-
-For details about the webserver feature itself, see:
-
-- `webserver/README.md`
+- `daily-page/latest.html`
 
 ## Developer Workflow
 
 When working on the HTML presentation in developer mode, edit the real template first instead of maintaining a separate preview page.
 
 - Use `daily-page/template.html` for structural layout changes
-- Use `daily-page/styles.css` for styling changes
+- Keep styling changes inside the inline `<style>` block in `daily-page/template.html`
 - Prefer small, isolated style changes during design work
 - Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
+
+Optional publish workflow in developer mode:
+
+- keep the editable scan output in `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html`
+- publish `daily-page/latest.html` to the Raspberry Pi as `/var/www/html/market-scanner-daily/latest.html`
+- publish the matching dated file to the same Raspberry Pi folder as an archive copy
+- keep those copy instructions in the automation itself rather than in a repo script
+- publishing is treated as a developer-mode task, not a normal end-user action
+- if someone tries to publish in user mode, the workflow should simply state that publishing is not available there
+
+Published Raspberry Pi path:
+
+- `/var/www/html/market-scanner-daily/latest.html`
+- `/var/www/html/market-scanner-daily/YYYY-MM-DD.html`
 
 ## First-Time Codex Setup
 
@@ -260,11 +254,14 @@ Those changes should be preserved in the project memory so future scans follow t
 
 ### April 5, 2026
 
-- Moved the web-published experiment into a separate optional `webserver/` folder
+- Removed the separate webserver experiment and re-centered the repo on the interactive scan plus the local HTML companion
 - Re-centered the root project memory on the interactive Codex-driven scan workflow
-- Simplified `daily-page/` to one real template, one dated generated edition, and one shared stylesheet
+- Simplified `daily-page/` to one real template plus generated standalone HTML editions
 - Switched the local HTML companion naming convention to `YYYY-MM-DD.html`
+- Added `daily-page/latest.html` as the rolling current-edition companion file
+- Inlined the HTML companion styling into the template and generated editions so each file is self-contained
 - Updated the local HTML workflow so scans point to the `daily-page/` folder instead of direct file links
+- Moved Raspberry Pi publishing into developer mode and blocked publishing in user mode
 
 ### April 3, 2026
 
@@ -295,13 +292,11 @@ Those changes should be preserved in the project memory so future scans follow t
 - `CONTEXT.md` stores the interactive project memory and scanning workflow
 - `README.md` is the human-facing overview of the whole project
 - `daily-page/` contains the local HTML companion and its template-driven layout files
-- `webserver/` contains the separate optional webserver/app feature
 
 Documentation split:
 
 - `CONTEXT.md` should describe the interactive main workflow
-- `README.md` should describe the whole project, including optional features such as `webserver/`
-- `webserver/README.md` should document the webserver feature itself
+- `README.md` should describe the interactive workflow and its local HTML companion
 
 When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
 

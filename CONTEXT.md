@@ -44,13 +44,14 @@ Preferred output style:
 - always present the daily market news in the same fixed format
 - when helpful, the same daily structure may also be rendered as a newspaper-style HTML page, but the chat edition remains the default output
 - the HTML companion does not need to imitate any specific newspaper exactly; it may use a more creative editorial layout as long as the section order and readability stay strong
-- the HTML companion should use a single top-level base color in its CSS theme layer so the overall visual theme can be changed easily from one place
+- the HTML companion should keep its main theme color easy to retune from one obvious `--theme-base` definition inside the HTML template
 - the HTML companion should reflect the same real information as the in-chat `scan`; it is a presentation layer, not a separate editorial version
-- when a local HTML companion is produced for a scan, fill `daily-page/template.html` with the current scan content and write the readable result to `daily-page/YYYY-MM-DD.html` using the scan date
+- when a local HTML companion is produced for a scan, fill `daily-page/template.html` with the current scan content and write the readable result to both `daily-page/YYYY-MM-DD.html` using the scan date and `daily-page/latest.html`
 - if that same dated HTML file already exists, overwrite it with the new version for that date
+- when writing the HTML companion for a scan, always overwrite `daily-page/latest.html` with the same content as the current scan
 - the normal local HTML flow should not depend on Node, Python, or a preview server; the user may open the `daily-page/` folder from the file system and click the dated HTML file there
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
-- when working on HTML design in developer mode without asking for a live scan, edit `daily-page/template.html` and `daily-page/styles.css` directly so the real local edition stays as the single source of layout truth
+- when working on HTML design in developer mode without asking for a live scan, edit `daily-page/template.html` directly so the real local edition stays as the single source of both layout and styling truth
 - keep all project documentation in English
 - when the user changes how data should be fetched, stored, or presented, save that instruction in this memory file
 - future behavior should follow the current contents of this memory file, not hard-coded assumptions that may become outdated
@@ -214,8 +215,8 @@ Formatting rules for the daily paper:
 - if a companion HTML page exists, place its link below the `Market Scanner Daily` title and the date line in a short `Today's Edition` section using a concise label such as `Open Folder`, then continue with the normal text version in chat
 - when a local HTML companion exists, prefer pointing to the `daily-page/` folder rather than the dated file itself, since folder links are more reliable than direct local HTML links in this environment
 - when the user types `scan`, treat the HTML companion link as automatic when available rather than optional; include it in the `Today's Edition` section by default
-- when a scan is also rendered to HTML, treat `daily-page/template.html` as the source template and keep the matching `daily-page/YYYY-MM-DD.html` file aligned with the same edition content used in chat
-- when working on HTML design only, use `daily-page/template.html` as the layout source and keep the dated HTML file in `daily-page/` as the generated local edition
+- when a scan is also rendered to HTML, treat `daily-page/template.html` as the source template and keep both the matching `daily-page/YYYY-MM-DD.html` file and `daily-page/latest.html` aligned with the same edition content used in chat
+- when working on HTML design only, use `daily-page/template.html` as the layout source and keep the generated HTML files in `daily-page/` aligned with that template
 
 ## Daily Prompt Template
 
@@ -257,6 +258,8 @@ Use this section when the current user is working on the project itself rather t
 
 - user mode is the default assumption
 - only switch into developer mode when the user explicitly indicates that they are doing so, for example by saying `devmode`
+- if the user asks to publish while still in user mode, do not publish
+- in that situation, respond briefly that publishing is not available in user mode, without asking a follow-up question
 - when the current user is in developer mode, interpret requests like `backup`, `restore`, git operations, workflow edits, HTML design work, and memory updates as project-maintenance tasks
 - in developer mode, `commit` means commit plus push
 - in developer mode, when a commit includes meaningful user-facing or workflow changes, update the `Change Log` section in `README.md` as part of that commit
@@ -265,6 +268,10 @@ Use this section when the current user is working on the project itself rather t
 - in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
 - when doing HTML design work without asking for a live scan, use `daily-page/template.html` with small isolated changes rather than maintaining a separate preview page
 - for HTML design iteration in developer mode, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
+- in developer mode, publishing the HTML companion to the Raspberry Pi is a separate maintenance workflow, not part of normal use mode
+- the simple publish target for the HTML companion is the Raspberry Pi folder `/var/www/html/market-scanner-daily`
+- when publishing to the Raspberry Pi, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
+- do not create a repo script for that publish step; the copy instructions should live in the automation that runs the scan
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
 - current preferred HTML direction in developer mode: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
 

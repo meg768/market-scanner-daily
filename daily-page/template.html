@@ -11,7 +11,603 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <style>
+:root {
+  /* Change this one color to retheme the entire HTML edition. */
+  /* Saved previous favorite: #6caed8 */
+  --theme-base: #6caed8;
+  --canvas-top: color-mix(in srgb, var(--theme-base) 26%, white);
+  --canvas: color-mix(in srgb, var(--theme-base) 17%, white);
+  --canvas-bottom: color-mix(in srgb, var(--theme-base) 21%, white);
+  --paper: color-mix(in srgb, var(--theme-base) 8%, white);
+  --paper-strong: color-mix(in srgb, var(--theme-base) 13%, white);
+  --paper-soft: color-mix(in srgb, var(--theme-base) 4%, white);
+  --ink: color-mix(in srgb, var(--theme-base) 10%, #171312);
+  --muted: color-mix(in srgb, var(--theme-base) 22%, #5a6772);
+  --rule: color-mix(in srgb, var(--theme-base) 14%, rgba(23, 19, 18, 0.12));
+  --rule-strong: color-mix(in srgb, var(--theme-base) 18%, rgba(23, 19, 18, 0.22));
+  --accent: color-mix(in srgb, var(--theme-base) 82%, white);
+  --accent-soft: color-mix(in srgb, var(--theme-base) 10%, transparent);
+  --accent-mid: color-mix(in srgb, var(--theme-base) 58%, #5f6f7c);
+  --accent-strong: color-mix(in srgb, var(--theme-base) 72%, #304656);
+  --accent-dark: color-mix(in srgb, var(--theme-base) 44%, #163244);
+  --positive: #1b6d58;
+  --negative: #983224;
+  --card-surface:
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 8%, rgba(255, 255, 255, 0.82)), color-mix(in srgb, var(--theme-base) 3%, rgba(255, 255, 255, 0.94))),
+    var(--paper-soft);
+  --shadow: 0 24px 60px color-mix(in srgb, var(--theme-base) 20%, rgba(29, 53, 74, 0.14));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.75), transparent 34%),
+    linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas) 24%, var(--canvas-bottom) 100%);
+  color: var(--ink);
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+.page-shell {
+  width: min(1220px, calc(100vw - 2rem));
+  margin: 1.25rem auto 1.9rem;
+  padding: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent 10%),
+    var(--paper);
+  border: 1px solid color-mix(in srgb, var(--theme-base) 10%, white);
+  box-shadow: var(--shadow);
+}
+
+.masthead {
+  padding: 1rem 1rem 1.2rem;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-base) 12%, transparent), rgba(255, 255, 255, 0) 46%),
+    linear-gradient(180deg, var(--paper-soft), var(--paper-strong));
+  border: 1px solid var(--rule);
+  border-radius: 1.4rem;
+}
+
+.masthead__rail,
+.section-label,
+.masthead__date,
+.brief-card__title,
+.lead-story__kicker,
+.market-card h3,
+.market-card__move,
+.story-card h3,
+.signal-strip h3,
+.calendar-list h3,
+.column-copy h3 {
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.masthead__rail {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+
+.masthead__title {
+  margin: 1rem 0 0.45rem;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.masthead__meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+  align-items: center;
+  justify-items: center;
+  padding-top: 1rem;
+}
+
+.masthead__date {
+  margin: 0;
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.masthead__tagline {
+  margin: 0;
+  max-width: 54ch;
+  font-size: 1.24rem;
+  line-height: 1.56;
+  color: var(--muted);
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.front-page,
+.news-section {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid var(--rule);
+  border-radius: 1.2rem;
+}
+
+.front-page {
+  grid-template-columns: minmax(0, 1.9fr) minmax(260px, 0.78fr);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-base) 8%, transparent), rgba(255, 255, 255, 0) 42%),
+    rgba(255, 255, 255, 0.38);
+}
+
+.section-label {
+  grid-column: 1 / -1;
+  display: block;
+  justify-self: start;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.lead-story {
+  padding: 0.4rem 0.2rem 0.2rem;
+}
+
+.lead-story__kicker {
+  margin: 0 0 0.6rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.lead-story__headline {
+  margin: 0 0 0.9rem;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.5rem, 2.35vw, 2.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  text-wrap: pretty;
+}
+
+.lead-story__deck {
+  margin: 0 0 1.15rem;
+  font-size: 1.52rem;
+  line-height: 1.44;
+  color: color-mix(in srgb, var(--theme-base) 20%, #27343d);
+}
+
+.lead-story__body {
+  columns: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.3rem;
+  line-height: 1.58;
+}
+
+.lead-story__body p {
+  margin: 0 0 1rem;
+}
+
+.lead-story__body p:first-child::first-letter {
+  float: left;
+  margin: 0.08rem 0.45rem 0 0;
+  font-size: 3.2rem;
+  line-height: 0.9;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.front-page__sidebar {
+  display: grid;
+  gap: 1rem;
+}
+
+.brief-card,
+.story-card,
+.market-card {
+  padding: 1rem;
+  background: var(--card-surface);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+}
+
+.brief-card__title {
+  margin: 0 0 0.75rem;
+  color: var(--accent-dark);
+  font-size: 0.67rem;
+}
+
+.brief-card__text,
+.brief-list {
+  margin: 0;
+  font-size: 1.18rem;
+  line-height: 1.58;
+}
+
+.brief-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.brief-links p {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.brief-links__source {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.brief-links__source:hover {
+  color: var(--accent-strong);
+}
+
+.brief-links__body {
+  line-height: 1.24;
+}
+
+.brief-list {
+  padding-left: 1rem;
+}
+
+.dashboard-grid,
+.story-grid,
+.calendar-list,
+.signal-strip {
+  display: grid;
+  gap: 1rem;
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.market-card {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  min-height: 100%;
+  background: var(--card-surface);
+}
+
+.market-card h3 {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.story-card h3,
+.calendar-list h3,
+.signal-strip h3 {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.market-card p,
+.story-card p,
+.calendar-list p,
+.signal-strip p {
+  margin: 0;
+  font-size: 1.18rem;
+  line-height: 1.56;
+}
+
+.market-card__move {
+  padding-top: 0.85rem;
+  margin-top: auto !important;
+  border-top: 1px solid var(--rule);
+  font-size: 0.7rem !important;
+  font-weight: 700;
+}
+
+.market-card__move--up {
+  color: var(--positive);
+}
+
+.market-card__move--down {
+  color: var(--negative);
+}
+
+.column-copy {
+  columns: 3;
+  column-gap: 1.7rem;
+}
+
+.column-copy article {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  background: var(--card-surface);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+}
+
+.column-copy h3 {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.column-copy p {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.58;
+}
+
+.story-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.section-summary {
+  margin: -0.35rem 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.56;
+}
+
+.story-card {
+  background: var(--card-surface);
+}
+
+.lead-story__headline a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.story-card__title {
+  margin: 0;
+  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
+  font-size: 1.22rem;
+  line-height: 1.56;
+}
+
+.story-card__source {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.lead-story__headline a:hover,
+.story-card__source:hover {
+  color: var(--accent-strong);
+}
+
+.calendar-list,
+.signal-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.calendar-list article,
+.signal-strip article {
+  padding: 1rem;
+  background: var(--card-surface);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+}
+
+.matters-list,
+.sources-list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.matters-list li,
+.sources-list li {
+  margin-bottom: 0.65rem;
+  font-size: 1.2rem;
+  line-height: 1.58;
+}
+
+.wire-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.wire-list li {
+  display: grid;
+  gap: 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wire-list__title {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
+}
+
+.wire-list__summary {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  color: color-mix(in srgb, var(--theme-base) 18%, #2a3740);
+}
+
+.wire-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.wire-list__source {
+  margin-bottom: 0.28rem;
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.wire-list__source:hover {
+  color: var(--accent-strong);
+}
+
+.wire-list span {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.source-link-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem 1.2rem;
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.source-link-list li {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.58;
+}
+
+.source-link-list a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.source-link-list a:hover {
+  color: var(--accent-strong);
+}
+
+@media (max-width: 1140px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .column-copy {
+    columns: 2;
+  }
+}
+
+@media (max-width: 860px) {
+  .page-shell {
+    width: min(100vw, calc(100vw - 0.8rem));
+    margin: 0.4rem auto 1rem;
+    padding: 0.6rem;
+  }
+
+  .masthead,
+  .front-page,
+  .news-section {
+    padding: 0.95rem;
+    border-radius: 0.95rem;
+  }
+
+  .masthead__meta,
+  .front-page,
+  .dashboard-grid,
+  .story-grid,
+  .calendar-list,
+  .signal-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid,
+  .story-grid,
+  .calendar-list,
+  .signal-strip,
+  .front-page__sidebar {
+    gap: 0.75rem;
+  }
+
+  .lead-story__body,
+  .column-copy {
+    columns: 1;
+  }
+
+  .brief-card,
+  .story-card,
+  .market-card,
+  .column-copy article,
+  .calendar-list article,
+  .signal-strip article {
+    padding: 0.8rem;
+  }
+
+  .market-card {
+    min-height: auto;
+  }
+
+  .masthead__rail {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+@media print {
+  html {
+    background: #fff;
+  }
+
+  .page-shell {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: 0;
+    background: #fff;
+  }
+}
+
+    </style>
   </head>
   <body>
     <div class="page-shell">
