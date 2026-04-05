@@ -161,11 +161,14 @@ Mode intent:
 Server-mode production rules:
 
 - keep the source budget intentionally small
+- treat `daily-page/latest.html` and dated HTML editions as outputs, not inputs
+- use `daily-page/template.html` as the layout source, but rebuild each edition from fresh sources gathered in the current run
 - center the tape check on `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
 - use one or two official sources for exact timing or macro confirmation
 - use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
 - once the edition is coherent, stop researching and write the files
 - if one small detail is missing, omit it instead of stalling the run
+- do not reuse prior edition phrasing as a shortcut
 - success means `daily-page/YYYY-MM-DD.html`, `daily-page/latest.html`, and the Raspberry Pi copies are updated
 
 Server-mode command:
@@ -314,6 +317,7 @@ Those changes should be preserved in the project memory so future scans follow t
 - Tightened the documented server-mode production rules so automation prioritizes finishing and publishing over open-ended research depth
 - Added a server-mode command pattern so Pi commands can stay short while the detailed production behavior lives in the project memory
 - Made `server mode scan_publish` the preferred short-form server-side prompt
+- Clarified that server mode must rebuild each edition from fresh sources and not treat prior generated HTML as source material
 
 ### April 3, 2026
 

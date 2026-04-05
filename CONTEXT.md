@@ -290,6 +290,7 @@ Use this section when the current user or automation is acting as the publishing
 - server mode is for production-like scan execution and publishing, not for design work or project maintenance
 - in server mode, run the normal scan logic using the same project memory and fixed output structure as user mode
 - in server mode, update both `daily-page/YYYY-MM-DD.html` for the current scan date and `daily-page/latest.html`
+- in server mode, treat `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html` as outputs only, not as research inputs
 - in server mode, the simple publish target for the HTML companion is the Raspberry Pi folder `/var/www/html/market-scanner-daily`
 - when publishing to the Raspberry Pi in server mode, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
 - in server mode, do not stop to ask follow-up questions unless there is a real blocker
@@ -311,17 +312,23 @@ Use this section when the current user or automation is acting as the publishing
 - in server mode, commands should be callable with the shortest practical prompt surface
 - if the prompt says `server mode` and then names a known server-mode command, treat that command name as the full instruction and rely on this memory file for the detailed behavior
 - do not require a long repeated production brief once the command name is established here
+- in server mode, rebuild the edition from fresh sources gathered in the current run rather than reusing prior edition phrasing
+- in server mode, do not read old generated HTML editions as editorial source material unless the user explicitly asks for comparison against a prior edition
+- in server mode, if the current day is a weekend or holiday, it is acceptable to anchor on the latest full cash session, but the writeup must still be freshly written in the current run
 
 Server-mode production brief:
 
 - read the project memory first
 - run the normal scan logic with the same section order as user mode
 - use a very small fixed source budget
+- use `daily-page/template.html` as the layout source only
+- do not use `daily-page/latest.html` or prior dated HTML editions as source material for the new scan
 - favor the core screen first: `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
 - use one or two official sources for exact timing or macro confirmation
 - use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
 - if one detail is missing, omit it rather than continuing to search
 - once the regime read is clear, stop researching and write the edition
+- write the edition in fresh language based on the current run instead of editing an older edition in place
 - success in server mode means the dated HTML file is updated, `latest.html` is updated, and both files are published
 
 Server-mode commands:
@@ -333,6 +340,7 @@ Server-mode commands:
   - source mix: use one or two official sources for exact timing or macro confirmation and one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
   - stopping rule: once the edition is coherent, stop researching and write the files
   - fallback rule: if one small detail is still missing, omit it instead of stalling the run
+  - freshness rule: build from fresh sources in the current run and do not reuse prior edition wording as a shortcut
   - success rule: the run succeeds only when the HTML files are updated and the Raspberry Pi copies are published
 
 Shortest recommended server-mode prompt:
