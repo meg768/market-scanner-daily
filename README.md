@@ -1,270 +1,71 @@
 # Market Scanner Daily
 
-Market Scanner Daily is a Codex-driven workspace for producing a daily world-markets paper centered on abnormal moves, catalyst trades, and special situations.
+Market Scanner Daily is a web-published market paper designed to detect unusual market behavior before it becomes ordinary news.
 
-It is built to function more like an early-warning system than a generic market recap. The workflow starts with market behavior, asks what looks unusual, and only then uses reporting or official releases to explain what changed and why it matters.
+It is not meant to be a generic news site. The core workflow starts with market data, asks what is abnormal, and only then uses reporting and official releases to explain the move.
 
-The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
+## What It Is For
 
-> Work in progress: this project is still being actively shaped, and parts of the workflow, documentation, and presentation may continue to evolve.
+- special situations
+- catalyst trades
+- bigger-than-normal moves in global assets and equities
+- early information about changes in the world
 
-## What This Project Is For
+## Core Method
 
-- Spot bigger-than-normal moves across equities, rates, FX, commodities, and crypto
-- Surface special situations such as M&A, restructurings, financing stress, squeezes, and regulatory shocks
-- Identify early signs that macro, policy, geopolitical, sector, or company narratives are shifting
-- Present the result in a fixed newspaper-style format in chat
-- Support a newspaper-style HTML page using the same daily structure
-- Keep durable workflow preferences and recurring rules in the project memory for future scans
+The scanner should create news by asking the right market questions first:
 
-## Signal-First Scanning Logic
+- Was volume higher or lower than normal?
+- Was the move bigger or smaller than normal?
+- What moved, and on what volume?
+- Is volatility up or down?
+- Is volatility higher or lower than normal?
 
-The scanner does not begin with the normal headline flow. It begins with the market asking:
+That means the first layer should be observable market evidence, not loose labels such as `relief rally`, `profit taking`, or `short covering`.
 
-- What moved?
-- How large was the move?
-- Was volume abnormal?
-- Is volatility confirming or contradicting the move?
-- Is the behavior confirmed across related assets, sectors, or regions?
-- Does the pattern look like new information, positioning stress, or a regime shift?
+## First Screen
 
-The first screen prioritizes:
+The default first screen should focus on:
 
 - `USO` for oil direction, move size, and volume
 - `VIXY` for volatility direction, move size, and volume
 - `SPY` for broad U.S. equity direction, move size, and volume
-- Major U.S. sector indexes or sector ETFs for breadth and divergence
+- major U.S. sector indexes or sector ETFs for breadth and divergence
 
-After that first-pass screen, the workflow uses current reporting and official releases to confirm the likely catalyst.
+The intended style is concrete and comparative, for example:
 
-## Daily Paper Format
+- `SPY is up more than 80% of prior daily moves`
+- `SPY volume is 30% above recent normal`
+- `USO is up 4.2% on 55% above normal volume`
 
-Every market paper uses the same section order:
+## Product Shape
 
-1. `Market Scanner Daily`
-2. Date line
-3. `Front Page`
-4. `Cross-Asset Dashboard`
-5. `Abnormal Moves`
-6. `Special Situations`
-7. `Catalyst Calendar`
-8. `Early-Info Signals`
-9. `What Matters Most`
-10. `Sources`
+The app publishes a market paper on the web:
 
-The aim is a concise market newspaper: overview first, then the most important cross-asset moves, then the situations and catalysts that deserve follow-up.
+- `/` serves the HTML edition
+- `/api/edition` serves the same edition as JSON
 
-Inside each section, the default presentation should read like normal newspaper copy: short prose paragraphs first, with lists used only when they genuinely improve clarity.
+The visual style is newspaper-like, but the editorial logic should remain signal-first and market-first.
 
-The same editorial structure can also be presented as an HTML page for a more visually polished, newspaper-like reading experience.
+## Current Deployment
 
-The HTML presentation does not need to mimic any one newspaper exactly. It can use a more creative editorial design as long as the structure stays clear and readable.
+Production currently runs on a Raspberry Pi:
 
-Its theme should also be easy to retune: the HTML CSS is designed around one top-level base color so the overall page theme can be changed from a single place.
+- Apache fronts `market-scanner-daily.egelberg.se`
+- Node serves the app on an internal port
+- PM2 keeps the web app alive
+- a separate PM2 refresh worker republishes the edition every 6 hours
 
-The HTML page is meant to reflect the same underlying scan content as the chat edition. It is a more readable presentation layer, not a separate version with different facts or conclusions.
+## Current Repo Layout
 
-Section labels such as `Front Page` and `Cross-Asset Dashboard` should appear as plain text, not as colored pill-shaped badges.
+- `server.js` local and production Node entry point
+- `ecosystem.config.cjs` PM2 process definitions
+- `lib/` shared scan and rendering logic
+- `public/` live site styling and assets
+- `scripts/` refresh and publishing helpers
+- `data/` persisted published edition cache
+- `CONTEXT.md` project memory and workflow rules
 
-## HTML Daily Page
+## Important Note
 
-The project now includes a newspaper-style HTML prototype in:
-
-- `daily-page/index.html`
-- `daily-page/design-preview.html`
-- `daily-page/serve.py`
-
-That page keeps the same daily section order while presenting it in a more editorial layout.
-
-For browser preview, start the local preview server:
-
-- macOS: `python3 daily-page/serve.py`
-- Windows: `python daily-page/serve.py`
-
-The script serves the page on localhost and attempts to open it automatically in your browser.
-
-For faster layout iteration without waiting for a fresh market scan, use the stable design-preview page:
-
-- Browser path: `http://127.0.0.1:8765/daily-page/design-preview.html`
-- Open it directly with: `python3 daily-page/serve.py --page design-preview`
-
-To retheme the HTML edition, change the `--theme-base` value near the top of `daily-page/styles.css`.
-
-Current intent:
-
-- chat remains the default output
-- the HTML page is a companion presentation layer
-- it should mirror the same actual scan content rather than becoming its own separate summary
-- the structure stays aligned with the main daily scan format
-- when available, the chat edition should include a short `Today's Edition` section under the title and date, linking to the HTML page with a concise label such as `Open in Browser` before the normal text version
-- when the local preview workflow is active, a normal `scan` request may also open the HTML companion in the browser automatically alongside the chat edition
-
-Example after a scan:
-
-- chat shows the normal daily paper in markdown
-- the `Today's Edition` section links to the HTML companion
-- the HTML page presents the same scan in a more readable newspaper-style layout
-- a typical edition includes a masthead, a lead story, sidebar summary boxes, and the same sections as the chat paper
-
-Example file:
-
-- `daily-page/index.html`
-
-## Developer Workflow
-
-When working on the HTML presentation in developer mode, use the stable preview page first instead of waiting for a live scan.
-
-- Use `python3 daily-page/serve.py --page design-preview` for faster layout iteration
-- Prefer small, isolated style changes during design work
-- Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
-
-## First-Time Codex Setup
-
-If you are new to Codex, use this simple step-by-step flow.
-
-### 1. Get access to Codex
-
-- Make sure you have a ChatGPT plan that includes Codex
-- If needed, upgrade your plan in your ChatGPT account settings
-
-### 2. Install Codex
-
-For this project, use the Codex app:
-
-- Download and install the Codex app for your operating system
-- Open the app
-- Sign in with your ChatGPT account when prompted
-
-### 3. Open this project in Codex
-
-Once Codex is installed and you are signed in:
-
-- If you do not use Git, download the project as a ZIP from GitHub: [Download market-scanner-daily.zip](https://github.com/meg768/market-scanner-daily/archive/refs/heads/main.zip)
-- Unzip the downloaded file on your computer
-- Open Codex
-- Choose to open a local folder or project
-- Select the unzipped `market-scanner-daily` folder
-- Wait for Codex to load the workspace context
-
-### 4. Start with a simple first prompt
-
-When the project is open, begin with one of these:
-
-- `scan`
-- `What's new?`
-- `help`
-- `how does this work?`
-- `what do you do?`
-
-### 5. Keep it simple at the start
-
-Recommended first workflow:
-
-1. Open the project
-2. Type `help` if you want a quick explanation of how the scanner works
-3. Type `scan` or `What's new?` to generate the latest market paper
-4. Ask follow-up questions such as `What changed versus yesterday?`
-
-### 6. What Codex will do in this repo
-
-When used correctly in this workspace, Codex should:
-
-- Read the project memory and operating context first
-- Run a fresh market scan when you ask for one
-- Present the result directly in chat
-- Keep using the same fixed newspaper-style structure
-
-## Using The Workspace
-
-Open the repo in Codex and use short prompts such as:
-
-- `scan`
-- `What's new?`
-- `help`
-
-Expected behavior:
-
-- `scan` or `What's new?` runs a fresh scan for the current day
-- when the HTML companion is available, `scan` also includes the browser link automatically near the top
-- `help`, `how does this work?`, or `what do you do?` explains how the scanner works
-- The paper is presented directly in chat
-- Each named section is written mainly as normal text rather than bullet-heavy notes
-- The layout stays fixed even when the market is quiet
-- Each scan request creates a new scan in chat
-- The scan uses the same fixed structure each time
-- Scans are generated in chat rather than saved as separate dated Markdown files
-
-## Market Analysis Mode
-
-This workspace is not limited to one-way daily scans. It can also be used as a sounding board for market interpretation.
-
-Examples:
-
-- `What changed versus yesterday?`
-- `Is oil confirming or contradicting equities here?`
-- `Does this look like positioning stress or new information?`
-- `Which sectors are confirming the macro narrative?`
-
-In those cases, the same signal-first framework should guide the analysis.
-
-## Source Philosophy
-
-The workflow prefers:
-
-- Market-generated signals first
-- Same-day reporting second
-- Official releases, calendars, and investor-relations material when confirmation matters
-
-Reuters is the default same-day reporting backbone when relevant, with primary releases used to confirm timing, policy, and catalysts.
-
-## Customization
-
-The scanner is intentionally configurable. Durable changes can be made to:
-
-- Markets and regions covered
-- Asset classes prioritized
-- Signal thresholds
-- Output length and tone
-- Source preferences
-- Watchlists and recurring situations
-- How the paper is displayed or updated
-
-Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
-
-## Change Log
-
-### April 3, 2026
-
-- Updated the scan style so each section is written primarily as normal newspaper-style text instead of bullet-heavy formatting
-- Mirrored that presentation rule in the README so the chat edition and documentation stay aligned
-- Added a stable HTML design preview page so layout work can happen without waiting for a fresh scan
-- Added a dedicated developer-mode section in the project memory to keep maintenance and design workflow rules in one place
-
-### April 2, 2026
-
-- Added a first-time Codex setup section for non-technical users
-- Added a direct GitHub ZIP download link for opening the project without Git
-- Simplified onboarding to focus on the Codex app instead of the CLI
-- Updated the scan workflow description so each `scan` request is treated as a new scan in chat
-- Added a newspaper-style HTML daily page prototype with the same editorial structure
-- Added a localhost preview server for opening the HTML page in a browser
-- Added a `Today's Edition` companion link in the chat paper format for the HTML page
-- Added a single-color HTML theme system based on `--theme-base` for easier retheming
-- Added a workflow rule that meaningful commits should also update this `Change Log`
-- Added a concrete README example showing how the HTML edition relates to a completed scan
-- Added a static SVG mockup in the README so GitHub visitors can preview the HTML edition visually
-- Replaced the README mockup with a smaller preview image taken from the real HTML scan example
-- Removed the embedded README preview image and kept the HTML section text-only again
-
-## Repository Layout
-
-- `AGENTS.md` sets project-level operating instructions for Codex
-- `CONTEXT.md` stores the project memory and scanning workflow
-- `README.md` is the human-facing overview
-- `daily-page/` contains the newspaper-style HTML presentation prototype
-
-When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
-
-## Documentation Standard
-
-All project documentation should remain in English.
+The current live web app infrastructure is in place, but the editorial logic should continue moving away from generic feed aggregation and toward a true market scanner based on abnormality detection, cross-asset confirmation, and catalyst follow-up.

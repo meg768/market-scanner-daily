@@ -1,0 +1,13 @@
+{
+  "name": "daily-news-paper",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "update-edition": "node scripts/update-edition.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
