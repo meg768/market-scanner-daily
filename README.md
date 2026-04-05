@@ -131,11 +131,42 @@ Optional publish workflow in server mode:
 - keep those copy instructions in the automation itself rather than in a repo script
 - publishing is treated as a server-mode task, not a normal end-user action
 - if someone tries to publish in user mode, the workflow should simply state that publishing is not available there
+- server mode should prefer reliable completion over open-ended research depth
+- the practical server-mode source set should stay small:
+  - a narrow tape check around `USO`, `VIXY`, `SPY`, and the most relevant sectors or confirming assets
+  - one or two official sources for exact macro timing or release confirmation
+  - one or two same-day reporting sources for catalyst confirmation
+- once the edition is coherent, server mode should write and publish immediately rather than keep expanding the scan
+- if a server-mode run cannot produce a perfect scan, it should still aim to publish a concise complete edition instead of stalling out
 
 Published Raspberry Pi path:
 
 - `/var/www/html/market-scanner-daily/latest.html`
 - `/var/www/html/market-scanner-daily/YYYY-MM-DD.html`
+
+## Operating Modes
+
+The project now has three distinct modes:
+
+- `user mode`: normal scanner usage such as `scan`, `What's new?`, and `help`
+- `developer mode`: project maintenance such as git work, memory edits, layout changes, and workflow changes
+- `server mode`: production-style scan generation plus Raspberry Pi publishing
+
+Mode intent:
+
+- `user mode` should produce the daily paper and its local HTML companion, but should not publish
+- `developer mode` should change the project, not act like the publishing runtime
+- `server mode` should optimize for reliable completion and publication rather than open-ended research depth
+
+Server-mode production rules:
+
+- keep the source budget intentionally small
+- center the tape check on `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
+- use one or two official sources for exact timing or macro confirmation
+- use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
+- once the edition is coherent, stop researching and write the files
+- if one small detail is missing, omit it instead of stalling the run
+- success means `daily-page/YYYY-MM-DD.html`, `daily-page/latest.html`, and the Raspberry Pi copies are updated
 
 ## First-Time Codex Setup
 
@@ -263,6 +294,8 @@ Those changes should be preserved in the project memory so future scans follow t
 - Updated the local HTML workflow so scans point to the `daily-page/` folder instead of direct file links
 - Added `server mode` as the dedicated role for automated scan generation and Raspberry Pi publishing
 - Blocked publishing in user mode and kept developer mode focused on project maintenance instead
+- Reorganized the project memory around explicit `user mode`, `developer mode`, and `server mode` sections
+- Tightened the documented server-mode production rules so automation prioritizes finishing and publishing over open-ended research depth
 
 ### April 3, 2026
 

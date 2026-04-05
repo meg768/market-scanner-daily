@@ -252,14 +252,25 @@ Use this prompt for future scans:
 - before relying on prior workflow assumptions, check this memory file as the source of truth for current behavior
 - if the memory filename changes, preserve all existing memory content and continue using the renamed memory file instead of assuming a fixed filename
 
-## Developer Mode
+## Operating Modes
+
+### User Mode
+
+Use this section when the current user is using the scanner as an end user rather than changing the project itself.
+
+- user mode is the default assumption
+- in user mode, treat short prompts such as `scan`, `What's new?`, and `help` as product-use commands rather than project-maintenance commands
+- in user mode, the main output is the in-chat daily paper
+- in user mode, when an HTML companion is produced for a scan, update `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html` as part of the normal scan flow
+- in user mode, do not publish
+- if the user asks to publish while still in user mode, respond briefly that publishing is not available in user mode, without asking a follow-up question
+- in user mode, prefer explaining the product and the scan logic in simple language if the user asks how it works
+
+### Developer Mode
 
 Use this section when the current user is working on the project itself rather than using the scanner as an end user.
 
-- user mode is the default assumption
 - only switch into developer mode when the user explicitly indicates that they are doing so, for example by saying `devmode`
-- if the user asks to publish while still in user mode, do not publish
-- in that situation, respond briefly that publishing is not available in user mode, without asking a follow-up question
 - when the current user is in developer mode, interpret requests like `backup`, `restore`, git operations, workflow edits, HTML design work, and memory updates as project-maintenance tasks
 - in developer mode, `commit` means commit plus push
 - in developer mode, when a commit includes meaningful user-facing or workflow changes, update the `Change Log` section in `README.md` as part of that commit
@@ -271,7 +282,7 @@ Use this section when the current user is working on the project itself rather t
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
 - current preferred HTML direction in developer mode: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
 
-## Server Mode
+### Server Mode
 
 Use this section when the current user or automation is acting as the publishing server rather than as a human end user or project developer.
 
@@ -283,6 +294,32 @@ Use this section when the current user or automation is acting as the publishing
 - when publishing to the Raspberry Pi in server mode, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
 - in server mode, do not stop to ask follow-up questions unless there is a real blocker
 - do not create a repo script for the publish step; the copy instructions should live in the automation or server-mode command that runs the scan
+- in server mode, optimize for successful completion and publication, not for maximum research depth
+- in server mode, treat the run as time-boxed production work: once there is enough evidence to write a coherent edition, stop researching and write the files
+- in server mode, prefer a small fixed source set over open-ended searching
+- in server mode, the default source budget is:
+  - one or two official sources for exact calendar or macro confirmation
+  - one or two same-day reporting sources such as Reuters or AP for narrative confirmation
+  - a small fixed tape check for `USO`, `VIXY`, `SPY`, and the most relevant confirming ETFs or sectors
+- in server mode, avoid exploratory searching once the core regime read is clear
+- in server mode, avoid long side quests into secondary company stories unless they clearly matter to the day’s scan
+- in server mode, if exact values for a few confirming assets are still missing, use a lightweight direct quote check for only those assets rather than expanding the search surface
+- in server mode, do not keep searching merely to improve wording or add one more supporting detail
+- in server mode, once the edition text is coherent, write `daily-page/YYYY-MM-DD.html`, write `daily-page/latest.html`, and publish immediately
+- in server mode, prefer a complete good edition over a slower or incomplete "perfect" edition
+- in server mode, if a run cannot finish the full scan, it should still prefer publishing a concise complete edition over publishing nothing
+
+Server-mode production brief:
+
+- read the project memory first
+- run the normal scan logic with the same section order as user mode
+- use a very small fixed source budget
+- favor the core screen first: `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
+- use one or two official sources for exact timing or macro confirmation
+- use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
+- if one detail is missing, omit it rather than continuing to search
+- once the regime read is clear, stop researching and write the edition
+- success in server mode means the dated HTML file is updated, `latest.html` is updated, and both files are published
 
 ## Recurring Source Set
 
