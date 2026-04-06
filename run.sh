@@ -9,7 +9,7 @@ PUBLISH_DIR="/var/www/html/market-scanner-daily"
 while true; do
   mkdir -p "$REPO_DIR/.codex"
   mkdir -p "$REPO_DIR/editions"
-  codex exec --full-auto -C "$REPO_DIR" "$PROMPT"
+  codex exec --full-auto -C "$REPO_DIR" "$PROMPT" < /dev/null
   mkdir -p "$PUBLISH_DIR"
   rsync -az --delete "$REPO_DIR/editions/" "$PUBLISH_DIR/"
   sleep "$INTERVAL_SECONDS"
