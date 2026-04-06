@@ -19,6 +19,11 @@ The main project is the interactive Codex-driven scanning workflow.
 - Support a newspaper-style HTML page using the same daily structure
 - Keep durable workflow preferences and recurring rules in the project memory for future scans
 
+The project memory is now split so it is easier to maintain:
+
+- `CONTEXT.md` for workflow, operating modes, restart behavior, and developer rules
+- `CONTENTS.md` for what should be scanned, how the paper should be presented, and which sources and preferences guide the content
+
 ## Signal-First Scanning Logic
 
 The scanner does not begin with the normal headline flow. It begins with the market asking:
@@ -261,6 +266,11 @@ Those changes should be preserved in the project memory so future scans follow t
 
 ## Change Log
 
+### April 6, 2026
+
+- Split the project memory into `CONTEXT.md` for workflow and `CONTENTS.md` for the editorial content brief
+- Moved scan coverage, source, output, and presentation rules into `CONTENTS.md` so the paper spec is easier to review at a glance
+
 ### April 5, 2026
 
 - Removed the separate webserver experiment and re-centered the repo on the interactive scan plus the local HTML companion
@@ -298,13 +308,15 @@ Those changes should be preserved in the project memory so future scans follow t
 ## Repository Layout
 
 - `AGENTS.md` sets project-level operating instructions for Codex
-- `CONTEXT.md` stores the interactive project memory and scanning workflow
+- `CONTEXT.md` stores workflow, operating rules, restart behavior, and developer conventions
+- `CONTENTS.md` stores the editorial brief, scan coverage rules, source priorities, and output preferences
 - `README.md` is the human-facing overview of the whole project
 - `editions/` contains the local HTML companion and its generated HTML files
 
 Documentation split:
 
-- `CONTEXT.md` should describe the interactive main workflow
+- `CONTEXT.md` should describe the interactive main workflow and operating rules
+- `CONTENTS.md` should describe what the market paper should contain and how it should be presented
 - `README.md` should describe the interactive workflow and its local HTML companion
 
 When workflow, methods, short commands, or usage patterns change in the project memory, the matching user-facing explanation should also be updated here in `README.md`.
