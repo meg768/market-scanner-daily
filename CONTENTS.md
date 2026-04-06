@@ -189,6 +189,7 @@ End with 3-5 bullets:
 - biggest unresolved risk
 - one or two situations to watch tomorrow
 - when useful, add one more early tell or conditional signal that would confirm or weaken the current read
+- format each item as a short label or title line followed by a separate explanatory sentence underneath, so the section reads like a set of brief conclusions rather than compressed one-liners
 
 ## Fixed Output Format
 
@@ -213,6 +214,7 @@ Formatting rules for the daily paper:
 - use the same newspaper-style markdown presentation in chat every day
 - inside each named section, default to short flowing text paragraphs rather than lists, unless a list is clearly the best fit for that specific content
 - do not let sections collapse into one-line summaries when there is enough signal to say more; prefer a little more explanatory detail under each heading
+- in `What Matters Most`, keep the stronger two-level structure: a short labeled line for each conclusion and then a compact explanatory line underneath
 - each scan request should produce a new scan rather than revising an earlier one
 - if an HTML version is created, preserve the same section order and overall editorial logic there as well
 - if an HTML version is created, keep it aligned with the factual content of the current `scan` rather than letting the HTML page drift into its own separate summary

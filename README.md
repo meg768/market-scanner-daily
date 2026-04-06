@@ -65,6 +65,8 @@ Inside each section, the default presentation should read like normal newspaper 
 
 Sections should feel substantive rather than headline-only: even concise days should usually include a little explanatory detail under each heading, not just a brief line item.
 
+`What Matters Most` should keep a two-level structure: a short labeled conclusion on one line and a brief explanatory line underneath it.
+
 Weekend and market-holiday handling:
 
 - if there has been no new full U.S. cash-equity session, the paper should still be treated as a fresh scan
@@ -271,6 +273,7 @@ Those changes should be preserved in the project memory so future scans follow t
 ### April 7, 2026
 
 - Adjusted the scan brief so each section should carry a bit more explanatory detail under its heading instead of collapsing into terse one-line summaries
+- Restored the expectation that `What Matters Most` should use title-style lines with short explanatory text under each one
 
 ### April 6, 2026
 
