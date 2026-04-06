@@ -63,6 +63,8 @@ The aim is a concise market newspaper: overview first, then the most important c
 
 Inside each section, the default presentation should read like normal newspaper copy: short prose paragraphs first, with lists used only when they genuinely improve clarity.
 
+Sections should feel substantive rather than headline-only: even concise days should usually include a little explanatory detail under each heading, not just a brief line item.
+
 Weekend and market-holiday handling:
 
 - if there has been no new full U.S. cash-equity session, the paper should still be treated as a fresh scan
@@ -265,6 +267,10 @@ The scanner is intentionally configurable. Durable changes can be made to:
 Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
 
 ## Change Log
+
+### April 7, 2026
+
+- Adjusted the scan brief so each section should carry a bit more explanatory detail under its heading instead of collapsing into terse one-line summaries
 
 ### April 6, 2026
 

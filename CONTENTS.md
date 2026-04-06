@@ -24,6 +24,7 @@ Preferred output style:
 - then special situations / catalyst names
 - end with a short interpretation of what changed and why it matters
 - within each daily-paper section such as `Front Page`, `Cross-Asset Dashboard`, `Abnormal Moves`, and the others, prefer normal prose paragraphs over bullet-heavy formatting so the scan reads more like a newspaper
+- under each main section heading, include enough concrete detail to make the section feel substantive rather than headline-only; a short section should still usually include at least one explanatory sentence or a few labeled points with context
 - when the user types `Help` or something clearly similar such as `help`, `how does this work`, or `what do you do`, explain what the scanner is designed for and how the daily scan is fetched
 - that `Help` response should explicitly describe the scan criteria: start from market-generated signals rather than generic headlines, screen `USO`, `VIXY`, `SPY`, and major U.S. sectors first, compare moves versus recent normal behavior when possible, then confirm and explain the moves with current reporting and official releases
 - that `Help` response should list only the main explicit quick commands the user can type, keeping it minimal, for example `scan` and `help`
@@ -90,6 +91,7 @@ Answer in 3-6 lines:
 - what is driving markets today
 - whether this is a normal move or a stress / transition day
 - what changed versus yesterday
+- include enough specificity that the summary can stand on its own as the lead read for the day
 
 ### 2. Cross-Asset Dashboard
 
@@ -107,6 +109,7 @@ For each important move, note:
 - magnitude
 - catalyst
 - whether the move looks unusual
+- include brief interpretation of why the move matters, not just the tape description
 
 ### 2A. SEK / USD Lens
 
@@ -131,6 +134,7 @@ Prioritize:
 - multi-standard-deviation style moves
 - moves with a clear trigger
 - moves that may imply second-order effects
+- give each selected move enough detail to explain both the trigger and the likely read-through
 
 ### 4. Special Situations
 
@@ -152,6 +156,7 @@ For each idea, include:
 - what happened
 - why it matters
 - what to monitor next
+- prefer compact but complete writeups over bare headline mentions
 
 ### 5. Catalyst Calendar
 
@@ -183,6 +188,7 @@ End with 3-5 bullets:
 - highest-conviction change
 - biggest unresolved risk
 - one or two situations to watch tomorrow
+- when useful, add one more early tell or conditional signal that would confirm or weaken the current read
 
 ## Fixed Output Format
 
@@ -206,6 +212,7 @@ Formatting rules for the daily paper:
 - if a section is thin that day, keep the section and state the most relevant item briefly
 - use the same newspaper-style markdown presentation in chat every day
 - inside each named section, default to short flowing text paragraphs rather than lists, unless a list is clearly the best fit for that specific content
+- do not let sections collapse into one-line summaries when there is enough signal to say more; prefer a little more explanatory detail under each heading
 - each scan request should produce a new scan rather than revising an earlier one
 - if an HTML version is created, preserve the same section order and overall editorial logic there as well
 - if an HTML version is created, keep it aligned with the factual content of the current `scan` rather than letting the HTML page drift into its own separate summary
