@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROMPT="Run a fresh scan for today using the project's normal scan workflow. If the editions directory does not exist, create it. Update the local HTML companion so editions/latest.html matches the new scan."
+PROMPT="Run a fresh scan for today using the project's normal scan workflow. If the editions directory does not exist, create it. Update the local HTML companion so editions/latest.html matches the new scan. Do not put current market news in the masthead undertitle; keep it generic and purpose-based, for example: A signal-first daily brief on cross-asset moves, catalysts, and special situations."
 INTERVAL_SECONDS=10800
 PUBLISH_DIR="/var/www/html/market-scanner-daily"
 

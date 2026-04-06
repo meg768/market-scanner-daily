@@ -41,6 +41,7 @@ Preferred output style:
 - the HTML companion should reflect the same real information as the in-chat `scan`; it is a presentation layer, not a separate editorial version
 - the masthead tagline or undertitle should describe the role of the front page and the edition in general terms, not carry fresh market news on its own
 - the undertitle should act like an editorial framing line for the edition rather than a second headline or a compressed market update
+- prefer a stable generic undertitle such as "A signal-first daily brief on cross-asset moves, catalysts, and special situations." rather than day-specific wording
 - do not include SEK or `USD/SEK` in the normal daily news flow by default; if FX matters, prefer broader pairs such as `EUR/USD` unless the user explicitly asks for SEK
 - if SEK is explicitly requested, add a dedicated `SEK / USD Lens` section after `Cross-Asset Dashboard` rather than folding SEK into the front-page flow
 - when showing the edition timestamp or date line in chat or HTML, use New York market time by default and label it as `ET`

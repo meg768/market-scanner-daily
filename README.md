@@ -82,6 +82,7 @@ Its theme should also be easy to retune: the HTML CSS is designed around one top
 The HTML page is meant to reflect the same underlying scan content as the chat edition. It is a more readable presentation layer, not a separate version with different facts or conclusions.
 
 The masthead undertitle should frame the purpose of the edition or front page in general terms, not introduce a separate batch of market news.
+Prefer a stable generic undertitle rather than day-specific wording there.
 
 By default, the scan should not surface SEK or `USD/SEK` in the normal daily flow. If FX matters, prefer broader pairs such as `EUR/USD` unless SEK is explicitly requested. When SEK is requested, add a dedicated `SEK / USD Lens` section after `Cross-Asset Dashboard`.
 
