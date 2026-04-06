@@ -46,12 +46,16 @@ Preferred output style:
 - the HTML companion does not need to imitate any specific newspaper exactly; it may use a more creative editorial layout as long as the section order and readability stay strong
 - the HTML companion should keep its main theme color easy to retune from one obvious `--theme-base` definition inside the HTML template
 - the HTML companion should reflect the same real information as the in-chat `scan`; it is a presentation layer, not a separate editorial version
-- when a local HTML companion is produced for a scan, fill `daily-page/template.html` with the current scan content and write the readable result to both `daily-page/YYYY-MM-DD.html` using the scan date and `daily-page/latest.html`
+- do not include SEK or `USD/SEK` in the normal daily news flow by default; if FX matters, prefer broader pairs such as `EUR/USD` unless the user explicitly asks for SEK
+- if SEK is explicitly requested, add a dedicated `SEK / USD Lens` section after `Cross-Asset Dashboard` rather than folding SEK into the front-page flow
+- when showing the edition timestamp or date line in chat or HTML, use New York market time by default and label it as `ET`
+- when a local HTML companion is produced for a scan, fill `template.html` with the current scan content and write the readable result to both `editions/YYYY-MM-DD.html` using the scan date and `editions/latest.html`
+- if the `editions/` directory does not exist when generating the HTML companion, create it before writing the files
 - if that same dated HTML file already exists, overwrite it with the new version for that date
-- when writing the HTML companion for a scan, always overwrite `daily-page/latest.html` with the same content as the current scan
-- the normal local HTML flow should not depend on Node, Python, or a preview server; the user may open the `daily-page/` folder from the file system and click the dated HTML file there
+- when writing the HTML companion for a scan, always overwrite `editions/latest.html` with the same content as the current scan
+- the normal local HTML flow should not depend on Node, Python, or a preview server; the user may open the `editions/` folder from the file system and click the dated HTML file there
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
-- when working on HTML design in developer mode without asking for a live scan, edit `daily-page/template.html` directly so the real local edition stays as the single source of both layout and styling truth
+- when working on HTML design in developer mode without asking for a live scan, edit `template.html` directly so the real local edition stays as the single source of both layout and styling truth
 - keep all project documentation in English
 - when the user changes how data should be fetched, stored, or presented, save that instruction in this memory file
 - future behavior should follow the current contents of this memory file, not hard-coded assumptions that may become outdated
@@ -119,6 +123,14 @@ For each important move, note:
 - magnitude
 - catalyst
 - whether the move looks unusual
+
+### 2A. SEK / USD Lens
+
+Only include this section when SEK is explicitly requested.
+
+- compare `SEK/USD` with `USD/SEK`
+- explain what the relationship implies for the Swedish krona versus the dollar
+- keep it as a focused currency interpretation section, not a front-page lead
 
 ### 3. Abnormal Moves
 
@@ -196,12 +208,13 @@ Use this exact section order for each in-chat market paper:
 2. date line
 3. `Front Page`
 4. `Cross-Asset Dashboard`
-5. `Abnormal Moves`
-6. `Special Situations`
-7. `Catalyst Calendar`
-8. `Early-Info Signals`
-9. `What Matters Most`
-10. `Sources`
+5. `SEK / USD Lens` when explicitly requested
+6. `Abnormal Moves`
+7. `Special Situations`
+8. `Catalyst Calendar`
+9. `Early-Info Signals`
+10. `What Matters Most`
+11. `Sources`
 
 Formatting rules for the daily paper:
 
@@ -212,11 +225,11 @@ Formatting rules for the daily paper:
 - each scan request should produce a new scan rather than revising an earlier one
 - if an HTML version is created, preserve the same section order and overall editorial logic there as well
 - if an HTML version is created, keep it aligned with the factual content of the current `scan` rather than letting the HTML page drift into its own separate summary
-- if a companion HTML page exists, place its link below the `Market Scanner Daily` title and the date line in a short `Today's Edition` section using a concise label such as `Open Folder`, then continue with the normal text version in chat
-- when a local HTML companion exists, prefer pointing to the `daily-page/` folder rather than the dated file itself, since folder links are more reliable than direct local HTML links in this environment
+- if a companion HTML page exists, place its link below the `Market Scanner Daily` title and the date line in a short `Today's Edition` section using a concise label such as `latest.html`, then continue with the normal text version in chat
+- when a local HTML companion exists, prefer pointing directly to `editions/latest.html` in the `Today's Edition` section rather than to the folder, since that file link works more reliably here
 - when the user types `scan`, treat the HTML companion link as automatic when available rather than optional; include it in the `Today's Edition` section by default
-- when a scan is also rendered to HTML, treat `daily-page/template.html` as the source template and keep both the matching `daily-page/YYYY-MM-DD.html` file and `daily-page/latest.html` aligned with the same edition content used in chat
-- when working on HTML design only, use `daily-page/template.html` as the layout source and keep the generated HTML files in `daily-page/` aligned with that template
+- when a scan is also rendered to HTML, treat `template.html` as the source template and keep both the matching `editions/YYYY-MM-DD.html` file and `editions/latest.html` aligned with the same edition content used in chat
+- when working on HTML design only, use `template.html` as the layout source and keep the generated HTML files in `editions/` aligned with that template
 
 ## Daily Prompt Template
 
@@ -229,6 +242,7 @@ Use this prompt for future scans:
 - startup rule: at the beginning of every new thread or restart, read this memory file before replying to the user or running commands
 - this startup rule applies even to casual greetings, short prompts, and trivial terminal-style requests
 - start each scan from market-generated signals, not from generic news headlines
+- when there has been no new full U.S. cash-equity session, still run a fresh scan by anchoring to the last full session and then layering on all meaningful developments since that close
 - treat abnormal price action, abnormal volume, and abnormal volatility as the main search filters
 - begin the daily screen with `USO`, `VIXY`, `SPY`, and the major U.S. sector indexes or sector ETFs before expanding into broader coverage
 - for each of those core screens, always ask three things first: direction, size of move versus normal, and volume versus normal
@@ -241,6 +255,12 @@ Use this prompt for future scans:
 - always identify the likely catalyst behind a move
 - emphasize what is unusual, not what is merely active
 - note exact dates when discussing "today", "yesterday", or upcoming catalysts
+- when a scan is presented with a time-of-day stamp, prefer New York market time rather than the local machine time
+- on weekends, market holidays, or any day without a new full U.S. cash-equity session, explicitly separate:
+  - the last full U.S. cash-equity session
+  - what changed since that session
+  - what is new before the next U.S. cash open
+- in those weekend or holiday scans, do not let the paper feel stale just because the U.S. cash session is unchanged; actively look for new macro releases, geopolitics, policy language, futures moves, international-market reactions, and other fresh developments since the last full session
 - when the user gives a minimal prompt asking for the latest update, interpret it as a request to produce the current daily market scan
 - display the scan content directly in the conversation in a readable newspaper-style markdown layout
 - keep the tone and layout slightly editorial, with section bodies written like normal article copy instead of checklist bullets whenever possible
@@ -261,9 +281,7 @@ Use this section when the current user is using the scanner as an end user rathe
 - user mode is the default assumption
 - in user mode, treat short prompts such as `scan`, `What's new?`, and `help` as product-use commands rather than project-maintenance commands
 - in user mode, the main output is the in-chat daily paper
-- in user mode, when an HTML companion is produced for a scan, update `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html` as part of the normal scan flow
-- in user mode, do not publish
-- if the user asks to publish while still in user mode, respond briefly that publishing is not available in user mode, without asking a follow-up question
+- in user mode, when an HTML companion is produced for a scan, update `editions/YYYY-MM-DD.html` and `editions/latest.html` as part of the normal scan flow
 - in user mode, prefer explaining the product and the scan logic in simple language if the user asks how it works
 
 ### Developer Mode
@@ -277,78 +295,10 @@ Use this section when the current user is working on the project itself rather t
 - in developer mode, `backup` means update one rolling git backup that can be returned to later
 - do not create separate named backup tags unless the user explicitly asks for them
 - in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
-- when doing HTML design work without asking for a live scan, use `daily-page/template.html` with small isolated changes rather than maintaining a separate preview page
+- when doing HTML design work without asking for a live scan, use `template.html` with small isolated changes rather than maintaining a separate preview page
 - for HTML design iteration in developer mode, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
 - current preferred HTML direction in developer mode: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
-
-### Server Mode
-
-Use this section when the current user or automation is acting as the publishing server rather than as a human end user or project developer.
-
-- only switch into server mode when the user explicitly indicates that they are doing so, for example by saying `server mode`
-- server mode is for production-like scan execution and publishing, not for design work or project maintenance
-- in server mode, run the normal scan logic using the same project memory and fixed output structure as user mode
-- in server mode, update both `daily-page/YYYY-MM-DD.html` for the current scan date and `daily-page/latest.html`
-- in server mode, treat `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html` as outputs only, not as research inputs
-- in server mode, the simple publish target for the HTML companion is the Raspberry Pi folder `/var/www/html/market-scanner-daily`
-- when publishing to the Raspberry Pi in server mode, copy `daily-page/latest.html` there as `latest.html` and also copy the matching dated `daily-page/YYYY-MM-DD.html` file into the same folder as an archive copy
-- in server mode, do not stop to ask follow-up questions unless there is a real blocker
-- do not create a repo script for the publish step; the copy instructions should live in the automation or server-mode command that runs the scan
-- in server mode, optimize for successful completion and publication, not for maximum research depth
-- in server mode, treat the run as time-boxed production work: once there is enough evidence to write a coherent edition, stop researching and write the files
-- in server mode, prefer a small fixed source set over open-ended searching
-- in server mode, the default source budget is:
-  - one or two official sources for exact calendar or macro confirmation
-  - one or two same-day reporting sources such as Reuters or AP for narrative confirmation
-  - a small fixed tape check for `USO`, `VIXY`, `SPY`, and the most relevant confirming ETFs or sectors
-- in server mode, avoid exploratory searching once the core regime read is clear
-- in server mode, avoid long side quests into secondary company stories unless they clearly matter to the day’s scan
-- in server mode, if exact values for a few confirming assets are still missing, use a lightweight direct quote check for only those assets rather than expanding the search surface
-- in server mode, do not keep searching merely to improve wording or add one more supporting detail
-- in server mode, once the edition text is coherent, write `daily-page/YYYY-MM-DD.html`, write `daily-page/latest.html`, and publish immediately
-- in server mode, prefer a complete good edition over a slower or incomplete "perfect" edition
-- in server mode, if a run cannot finish the full scan, it should still prefer publishing a concise complete edition over publishing nothing
-- in server mode, commands should be callable with the shortest practical prompt surface
-- if the prompt says `server mode` and then names a known server-mode command, treat that command name as the full instruction and rely on this memory file for the detailed behavior
-- do not require a long repeated production brief once the command name is established here
-- in server mode, rebuild the edition from fresh sources gathered in the current run rather than reusing prior edition phrasing
-- in server mode, do not read old generated HTML editions as editorial source material unless the user explicitly asks for comparison against a prior edition
-- in server mode, if the current day is a weekend or holiday, it is acceptable to anchor on the latest full cash session, but the writeup must still be freshly written in the current run
-
-Server-mode production brief:
-
-- read the project memory first
-- run the normal scan logic with the same section order as user mode
-- use a very small fixed source budget
-- use `daily-page/template.html` as the layout source only
-- do not use `daily-page/latest.html` or prior dated HTML editions as source material for the new scan
-- favor the core screen first: `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
-- use one or two official sources for exact timing or macro confirmation
-- use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
-- if one detail is missing, omit it rather than continuing to search
-- once the regime read is clear, stop researching and write the edition
-- write the edition in fresh language based on the current run instead of editing an older edition in place
-- success in server mode means the dated HTML file is updated, `latest.html` is updated, and both files are published
-
-Server-mode commands:
-
-- `scan_publish`
-  - meaning: run a fresh current market scan in server mode, write `daily-page/YYYY-MM-DD.html`, write `daily-page/latest.html`, then publish both files to `/var/www/html/market-scanner-daily/`
-  - source budget: use a very small fixed source set
-  - tape focus: center the tape check on `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
-  - source mix: use one or two official sources for exact timing or macro confirmation and one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
-  - stopping rule: once the edition is coherent, stop researching and write the files
-  - fallback rule: if one small detail is still missing, omit it instead of stalling the run
-  - freshness rule: build from fresh sources in the current run and do not reuse prior edition wording as a shortcut
-  - success rule: the run succeeds only when the HTML files are updated and the Raspberry Pi copies are published
-
-Shortest recommended server-mode prompt:
-
-- `server mode scan_publish`
-  - treat this as a complete production instruction
-  - do not ask for the long-form workflow again
-  - use the server-mode production brief and the `scan_publish` command definition automatically
 
 ## Recurring Source Set
 

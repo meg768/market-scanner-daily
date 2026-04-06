@@ -58,6 +58,12 @@ The aim is a concise market newspaper: overview first, then the most important c
 
 Inside each section, the default presentation should read like normal newspaper copy: short prose paragraphs first, with lists used only when they genuinely improve clarity.
 
+Weekend and market-holiday handling:
+
+- if there has been no new full U.S. cash-equity session, the paper should still be treated as a fresh scan
+- explicitly distinguish between the last full U.S. cash session and what changed after it
+- use fresh macro releases, geopolitics, policy language, futures, and international-market moves to keep the paper current ahead of the next U.S. open
+
 The same editorial structure can also be presented as an HTML page for a more visually polished, newspaper-like reading experience.
 
 The HTML presentation does not need to mimic any one newspaper exactly. It can use a more creative editorial design as long as the structure stays clear and readable.
@@ -66,32 +72,37 @@ Its theme should also be easy to retune: the HTML CSS is designed around one top
 
 The HTML page is meant to reflect the same underlying scan content as the chat edition. It is a more readable presentation layer, not a separate version with different facts or conclusions.
 
+By default, the scan should not surface SEK or `USD/SEK` in the normal daily flow. If FX matters, prefer broader pairs such as `EUR/USD` unless SEK is explicitly requested. When SEK is requested, add a dedicated `SEK / USD Lens` section after `Cross-Asset Dashboard`.
+
+Edition timestamps should use New York market time by default and be labeled as `ET` rather than local machine time.
+
 Section labels such as `Front Page` and `Cross-Asset Dashboard` should appear as plain text, not as colored pill-shaped badges.
 
 ## HTML Daily Page
 
 The project now includes a newspaper-style HTML prototype in:
 
-- `daily-page/YYYY-MM-DD.html`
-- `daily-page/latest.html`
-- `daily-page/template.html`
+- `editions/YYYY-MM-DD.html`
+- `editions/latest.html`
+- `template.html`
 
 The root-side HTML companion is intended to mirror the same scan content as chat while remaining easy to open locally.
 
 Normal local flow:
 
-- fill `daily-page/template.html` with the current scan content
-- write the readable companion page to `daily-page/YYYY-MM-DD.html` using the scan date
-- write the same content to `daily-page/latest.html`
+- fill `template.html` with the current scan content
+- if `editions/` does not exist yet, create it before writing the generated files
+- write the readable companion page to `editions/YYYY-MM-DD.html` using the scan date
+- write the same content to `editions/latest.html`
 - overwrite that dated file if it already exists for the same day
-- overwrite `daily-page/latest.html` on every new scan
-- open the `daily-page/` folder from Finder / File Explorer and click the dated file there
+- overwrite `editions/latest.html` on every new scan
+- open the `editions/` folder from Finder / File Explorer and click the dated file there
 
 That keeps the HTML edition reproducible without depending on Node, Python, or a preview server.
 
-For layout iteration, edit `daily-page/template.html` directly so the real local edition stays as the single source of both layout and styling.
+For layout iteration, edit `template.html` directly so the real local edition stays as the single source of both layout and styling.
 
-To retheme the generated HTML edition, change the `--theme-base` value near the top of the inline `<style>` block in `daily-page/template.html`.
+To retheme the generated HTML edition, change the `--theme-base` value near the top of the inline `<style>` block in `template.html`.
 
 Current intent:
 
@@ -99,93 +110,41 @@ Current intent:
 - the HTML page is a companion presentation layer
 - it should mirror the same actual scan content rather than becoming its own separate summary
 - the structure stays aligned with the main daily scan format
-- when available, the chat edition should include a short `Today's Edition` section under the title and date, pointing to the `daily-page/` folder before the normal text version
-- the normal `scan` workflow should keep `daily-page/template.html`, the matching `daily-page/YYYY-MM-DD.html` file, and `daily-page/latest.html` aligned with the same edition structure
+- when available, the chat edition should include a short `Today's Edition` section under the title and date, pointing directly to `editions/latest.html` before the normal text version
+- the normal `scan` workflow should keep `template.html`, the matching `editions/YYYY-MM-DD.html` file, and `editions/latest.html` aligned with the same edition structure
 
 Example after a scan:
 
 - chat shows the normal daily paper in markdown
-- the `Today's Edition` section points to the `daily-page/` folder
+- the `Today's Edition` section points to `editions/latest.html`
 - the HTML page presents the same scan in a more readable newspaper-style layout
 - a typical edition includes a masthead, a lead story, sidebar summary boxes, and the same sections as the chat paper
 
 Example file:
 
-- `daily-page/2026-04-05.html`
-- `daily-page/latest.html`
+- `editions/2026-04-05.html`
+- `editions/latest.html`
 
 ## Developer Workflow
 
 When working on the HTML presentation in developer mode, edit the real template first instead of maintaining a separate preview page.
 
-- Use `daily-page/template.html` for structural layout changes
-- Keep styling changes inside the inline `<style>` block in `daily-page/template.html`
+- Use `template.html` for structural layout changes
+- Keep styling changes inside the inline `<style>` block in `template.html`
 - Prefer small, isolated style changes during design work
 - Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
 
-Optional publish workflow in server mode:
-
-- keep the editable scan output in `daily-page/YYYY-MM-DD.html` and `daily-page/latest.html`
-- publish `daily-page/latest.html` to the Raspberry Pi as `/var/www/html/market-scanner-daily/latest.html`
-- publish the matching dated file to the same Raspberry Pi folder as an archive copy
-- keep those copy instructions in the automation itself rather than in a repo script
-- publishing is treated as a server-mode task, not a normal end-user action
-- if someone tries to publish in user mode, the workflow should simply state that publishing is not available there
-- server mode should prefer reliable completion over open-ended research depth
-- the practical server-mode source set should stay small:
-  - a narrow tape check around `USO`, `VIXY`, `SPY`, and the most relevant sectors or confirming assets
-  - one or two official sources for exact macro timing or release confirmation
-  - one or two same-day reporting sources for catalyst confirmation
-- once the edition is coherent, server mode should write and publish immediately rather than keep expanding the scan
-- if a server-mode run cannot produce a perfect scan, it should still aim to publish a concise complete edition instead of stalling out
-
-Published Raspberry Pi path:
-
-- `/var/www/html/market-scanner-daily/latest.html`
-- `/var/www/html/market-scanner-daily/YYYY-MM-DD.html`
-
 ## Operating Modes
 
-The project now has three distinct modes:
+The project now has two distinct modes:
 
 - `user mode`: normal scanner usage such as `scan`, `What's new?`, and `help`
 - `developer mode`: project maintenance such as git work, memory edits, layout changes, and workflow changes
-- `server mode`: production-style scan generation plus Raspberry Pi publishing
 
 Mode intent:
 
-- `user mode` should produce the daily paper and its local HTML companion, but should not publish
-- `developer mode` should change the project, not act like the publishing runtime
-- `server mode` should optimize for reliable completion and publication rather than open-ended research depth
-
-Server-mode production rules:
-
-- keep the source budget intentionally small
-- treat `daily-page/latest.html` and dated HTML editions as outputs, not inputs
-- use `daily-page/template.html` as the layout source, but rebuild each edition from fresh sources gathered in the current run
-- center the tape check on `USO`, `VIXY`, `SPY`, and only the most relevant confirming sectors or assets
-- use one or two official sources for exact timing or macro confirmation
-- use one or two same-day reporting sources such as Reuters or AP for catalyst confirmation
-- once the edition is coherent, stop researching and write the files
-- if one small detail is missing, omit it instead of stalling the run
-- do not reuse prior edition phrasing as a shortcut
-- success means `daily-page/YYYY-MM-DD.html`, `daily-page/latest.html`, and the Raspberry Pi copies are updated
-
-Server-mode command:
-
-- `scan_publish`
-  - runs a fresh current market scan in server mode
-  - updates `daily-page/YYYY-MM-DD.html`
-  - updates `daily-page/latest.html`
-  - publishes both files to `/var/www/html/market-scanner-daily/`
-
-The idea is that server-side commands should stay short. The detailed behavior belongs in the project memory under server mode, while the actual command only needs to invoke server mode and the command name.
-
-Shortest recommended server-side prompt:
-
-- `server mode scan_publish`
-
-That short prompt is intended to be enough on its own. The detailed production behavior should come from the project memory rather than being repeated in every CLI invocation.
+- `user mode` should produce the daily paper and its local HTML companion
+- `developer mode` should change the project and its workflow
 
 ## First-Time Codex Setup
 
@@ -306,18 +265,12 @@ Those changes should be preserved in the project memory so future scans follow t
 
 - Removed the separate webserver experiment and re-centered the repo on the interactive scan plus the local HTML companion
 - Re-centered the root project memory on the interactive Codex-driven scan workflow
-- Simplified `daily-page/` to one real template plus generated standalone HTML editions
+- Simplified `editions/` to one real template plus generated standalone HTML editions
 - Switched the local HTML companion naming convention to `YYYY-MM-DD.html`
-- Added `daily-page/latest.html` as the rolling current-edition companion file
+- Added `editions/latest.html` as the rolling current-edition companion file
 - Inlined the HTML companion styling into the template and generated editions so each file is self-contained
-- Updated the local HTML workflow so scans point to the `daily-page/` folder instead of direct file links
-- Added `server mode` as the dedicated role for automated scan generation and Raspberry Pi publishing
-- Blocked publishing in user mode and kept developer mode focused on project maintenance instead
-- Reorganized the project memory around explicit `user mode`, `developer mode`, and `server mode` sections
-- Tightened the documented server-mode production rules so automation prioritizes finishing and publishing over open-ended research depth
-- Added a server-mode command pattern so Pi commands can stay short while the detailed production behavior lives in the project memory
-- Made `server mode scan_publish` the preferred short-form server-side prompt
-- Clarified that server mode must rebuild each edition from fresh sources and not treat prior generated HTML as source material
+- Updated the local HTML workflow so scans point to the `editions/` folder instead of direct file links
+- Reorganized the project memory around explicit `user mode` and `developer mode` sections
 
 ### April 3, 2026
 
@@ -347,7 +300,7 @@ Those changes should be preserved in the project memory so future scans follow t
 - `AGENTS.md` sets project-level operating instructions for Codex
 - `CONTEXT.md` stores the interactive project memory and scanning workflow
 - `README.md` is the human-facing overview of the whole project
-- `daily-page/` contains the local HTML companion and its template-driven layout files
+- `editions/` contains the local HTML companion and its generated HTML files
 
 Documentation split:
 
