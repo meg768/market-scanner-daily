@@ -7,6 +7,7 @@ INTERVAL_SECONDS=10800
 PUBLISH_DIR="/var/www/html/market-scanner-daily"
 
 while true; do
+  mkdir -p "$REPO_DIR/.codex"
   mkdir -p "$REPO_DIR/editions"
   codex exec --full-auto -C "$REPO_DIR" "$PROMPT"
   mkdir -p "$PUBLISH_DIR"
