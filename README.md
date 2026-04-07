@@ -277,6 +277,7 @@ Those changes should be preserved in the project memory so future scans follow t
 
 - Adjusted the scan brief so each section should carry a bit more explanatory detail under its heading instead of collapsing into terse one-line summaries
 - Restored the expectation that `What Matters Most` should use title-style lines with short explanatory text under each one
+- Reworked `run.sh` to match the tennis scanner pattern, with one-shot execution by default plus optional `--publish` and `--daily HH:MM` scheduling flags
 
 ### April 6, 2026
 
