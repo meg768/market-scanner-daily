@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Scanner Daily | Preview Edition</title>
+    <meta
+      name="description"
+      content="Static preview page for Market Scanner Daily."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+:root {
+  --theme-base: #6caed8;
+  --canvas-top: color-mix(in srgb, var(--theme-base) 26%, white);
+  --canvas: color-mix(in srgb, var(--theme-base) 17%, white);
+  --canvas-bottom: color-mix(in srgb, var(--theme-base) 21%, white);
+  --paper: color-mix(in srgb, var(--theme-base) 8%, white);
+  --paper-strong: color-mix(in srgb, var(--theme-base) 13%, white);
+  --paper-soft: color-mix(in srgb, var(--theme-base) 4%, white);
+  --ink: color-mix(in srgb, var(--theme-base) 10%, #171312);
+  --muted: color-mix(in srgb, var(--theme-base) 22%, #5a6772);
+  --rule: color-mix(in srgb, var(--theme-base) 14%, rgba(23, 19, 18, 0.12));
+  --accent: color-mix(in srgb, var(--theme-base) 82%, white);
+  --accent-strong: color-mix(in srgb, var(--theme-base) 72%, #304656);
+  --accent-dark: color-mix(in srgb, var(--theme-base) 44%, #163244);
+  --positive: #1b6d58;
+  --negative: #983224;
+  --card-surface:
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-base) 8%, rgba(255, 255, 255, 0.82)), color-mix(in srgb, var(--theme-base) 3%, rgba(255, 255, 255, 0.94))),
+    var(--paper-soft);
+  --shadow: 0 24px 60px color-mix(in srgb, var(--theme-base) 20%, rgba(29, 53, 74, 0.14));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.75), transparent 34%),
+    linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas) 24%, var(--canvas-bottom) 100%);
+  color: var(--ink);
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell {
+  width: min(1220px, calc(100vw - 2rem));
+  margin: 1.25rem auto 1.9rem;
+  padding: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent 10%),
+    var(--paper);
+  border: 1px solid color-mix(in srgb, var(--theme-base) 10%, white);
+  box-shadow: var(--shadow);
+}
+
+.masthead {
+  padding: 1rem 1rem 1.2rem;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-base) 12%, transparent), rgba(255, 255, 255, 0) 46%),
+    linear-gradient(180deg, var(--paper-soft), var(--paper-strong));
+  border: 1px solid var(--rule);
+  border-radius: 1.4rem;
+}
+
+.masthead__rail,
+.section-label,
+.masthead__date,
+.brief-card__title,
+.lead-story__kicker,
+.market-card h3,
+.market-card__move,
+.story-card h3,
+.signal-strip h3,
+.calendar-list h3,
+.column-copy h3 {
+  font-family: "Newsreader", Georgia, serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.masthead__rail {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+
+.masthead__title {
+  margin: 1rem 0 0.45rem;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.masthead__meta {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  padding-top: 1rem;
+}
+
+.masthead__date {
+  margin: 0;
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.masthead__tagline {
+  margin: 0;
+  max-width: 54ch;
+  font-size: 1.24rem;
+  line-height: 1.56;
+  color: var(--muted);
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.front-page,
+.news-section {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid var(--rule);
+  border-radius: 1.2rem;
+}
+
+.front-page {
+  grid-template-columns: minmax(0, 1.9fr) minmax(260px, 0.78fr);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-base) 8%, transparent), rgba(255, 255, 255, 0) 42%),
+    rgba(255, 255, 255, 0.38);
+}
+
+.section-label {
+  grid-column: 1 / -1;
+  display: block;
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.lead-story {
+  padding: 0.4rem 0.2rem 0.2rem;
+}
+
+.lead-story__kicker {
+  margin: 0 0 0.6rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.lead-story__headline {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.5rem, 2.35vw, 2.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.lead-story__deck {
+  margin: 0 0 1.15rem;
+  font-size: 1.52rem;
+  line-height: 1.44;
+  color: color-mix(in srgb, var(--theme-base) 20%, #27343d);
+}
+
+.lead-story__body {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.3rem;
+  line-height: 1.58;
+}
+
+.lead-story__body p {
+  margin: 0 0 1rem;
+}
+
+.lead-story__body p:first-child::first-letter {
+  float: left;
+  margin: 0.08rem 0.45rem 0 0;
+  font-size: 3.2rem;
+  line-height: 0.9;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.front-page__sidebar,
+.dashboard-grid,
+.story-grid,
+.calendar-list,
+.signal-strip {
+  display: grid;
+  gap: 1rem;
+}
+
+.brief-card,
+.story-card,
+.market-card,
+.calendar-list article,
+.signal-strip article,
+.column-copy article {
+  padding: 1rem;
+  background: var(--card-surface);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+}
+
+.brief-card__title,
+.market-card h3,
+.story-card h3,
+.calendar-list h3,
+.signal-strip h3,
+.column-copy h3 {
+  margin: 0 0 0.65rem;
+  color: var(--accent-dark);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.brief-list,
+.matters-list,
+.source-link-list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.brief-list li,
+.matters-list li,
+.source-link-list li {
+  margin-bottom: 0.65rem;
+  font-size: 1.18rem;
+  line-height: 1.58;
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.market-card {
+  display: grid;
+  align-content: start;
+  min-height: 100%;
+}
+
+.market-card p,
+.story-card p,
+.calendar-list p,
+.signal-strip p,
+.column-copy p {
+  margin: 0;
+  font-size: 1.18rem;
+  line-height: 1.56;
+}
+
+.market-card__move {
+  padding-top: 0.85rem;
+  margin-top: auto !important;
+  border-top: 1px solid var(--rule);
+  font-size: 0.7rem !important;
+  font-weight: 700;
+}
+
+.market-card__move--up {
+  color: var(--positive);
+}
+
+.market-card__move--down {
+  color: var(--negative);
+}
+
+.section-summary {
+  margin: -0.35rem 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.56;
+}
+
+.story-grid,
+.calendar-list,
+.signal-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.column-copy {
+  columns: 3;
+  column-gap: 1.7rem;
+}
+
+.column-copy article {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+}
+
+.wire-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.wire-list li {
+  display: grid;
+  gap: 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wire-list__title {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  font-weight: 500;
+}
+
+.wire-list__summary {
+  margin: 0;
+  font-size: 1.22rem;
+  line-height: 1.56;
+  color: color-mix(in srgb, var(--theme-base) 18%, #2a3740);
+}
+
+.source-link-list a {
+  color: var(--accent-dark);
+}
+
+@media (max-width: 1140px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .column-copy {
+    columns: 2;
+  }
+}
+
+@media (max-width: 860px) {
+  .page-shell {
+    width: min(100vw, calc(100vw - 0.8rem));
+    margin: 0.4rem auto 1rem;
+    padding: 0.6rem;
+  }
+
+  .masthead,
+  .front-page,
+  .news-section {
+    padding: 0.95rem;
+    border-radius: 0.95rem;
+  }
+
+  .front-page,
+  .dashboard-grid,
+  .story-grid,
+  .calendar-list,
+  .signal-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .column-copy {
+    columns: 1;
+  }
+
+  .masthead__rail {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <div class="masthead__rail">
+          <span>Preview Edition</span>
+          <span>Static Layout Demo</span>
+          <span>New York Market Time</span>
+        </div>
+        <h1 class="masthead__title">Market Scanner Daily</h1>
+        <div class="masthead__meta">
+          <p class="masthead__date">April 10, 2026, 3:30 PM ET</p>
+          <p class="masthead__tagline">
+            A signal-first daily brief on cross-asset moves, catalysts, and special situations.
+          </p>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="front-page">
+          <div class="section-label">Front Page</div>
+          <div class="lead-story">
+            <p class="lead-story__kicker">Lead Story</p>
+            <h2 class="lead-story__headline">
+              The tape looks steadier on the surface, but cross-asset confirmation is still mixed.
+            </h2>
+            <p class="lead-story__deck">
+              Equities are trying to extend a calm open, yet crude, rates, and defensives still suggest the market is negotiating risk rather than embracing it.
+            </p>
+            <div class="lead-story__body">
+              <p>
+                This preview page uses fixed example copy to show how the edition can read when the lead is written like a front-page market story rather than a dashboard export. The body can carry a little texture, a little interpretation, and still stay compact.
+              </p>
+              <p>
+                The goal is not to cram in every move. It is to let the reader understand what the session feels like, what confirms that feeling, and what parts of the tape are still resisting the obvious narrative.
+              </p>
+            </div>
+          </div>
+
+          <aside class="front-page__sidebar">
+            <section class="brief-card">
+              <p class="brief-card__title">At A Glance</p>
+              <ul class="brief-list">
+                <li>Oil up while cyclicals lag would keep the tone cautious.</li>
+                <li>A calmer dollar would make any equity strength more credible.</li>
+                <li>Macro calendar density still matters more than isolated headlines.</li>
+              </ul>
+            </section>
+
+            <section class="brief-card">
+              <p class="brief-card__title">Front Page Notes</p>
+              <ul class="brief-list">
+                <li>Lead box still reads cleanly with more newspaper-style copy.</li>
+                <li>Sidebar works best with three short, high-signal points.</li>
+                <li>The serif treatment pushes the page further toward a print feel.</li>
+              </ul>
+            </section>
+          </aside>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Cross-Asset Dashboard</div>
+          <p class="section-summary">
+            A sample five-card strip showing how the daily dashboard can stay readable while still carrying short interpretation under each asset bucket.
+          </p>
+          <div class="dashboard-grid">
+            <article class="market-card">
+              <h3>Equities</h3>
+              <p>Index futures are firmer, but breadth is still modest and defensives are holding more of the leadership than a clean risk-on tape would suggest.</p>
+              <p class="market-card__move market-card__move--up">Measured rebound</p>
+            </article>
+            <article class="market-card">
+              <h3>Rates</h3>
+              <p>The long end remains sticky enough to keep pressure on valuation-sensitive areas, which stops the equity bounce from feeling fully comfortable.</p>
+              <p class="market-card__move market-card__move--down">Yields holding high</p>
+            </article>
+            <article class="market-card">
+              <h3>FX</h3>
+              <p>The dollar is not extending sharply, which is helpful for the tone, but it is not yet giving a full green light to global cyclicals either.</p>
+              <p class="market-card__move market-card__move--up">Stability helps</p>
+            </article>
+            <article class="market-card">
+              <h3>Commodities</h3>
+              <p>Crude remains the cleanest risk check. If it keeps rising while equities relax, the market may be underpricing renewed inflation pressure.</p>
+              <p class="market-card__move market-card__move--up">Still the tell</p>
+            </article>
+            <article class="market-card">
+              <h3>Crypto</h3>
+              <p>Crypto can help show whether speculative appetite is broadening or if the bounce is still tactical and concentrated in the most liquid risk assets.</p>
+              <p class="market-card__move market-card__move--up">Useful sentiment read</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Abnormal Moves</div>
+          <p class="section-summary">
+            This section works well as a three-card grid when the goal is to highlight unusual moves and explain why they matter.
+          </p>
+          <div class="story-grid">
+            <article class="story-card">
+              <h3>Energy</h3>
+              <p>A continued oil move with only partial confirmation from equities would keep the market in a transition state rather than a full relief phase.</p>
+            </article>
+            <article class="story-card">
+              <h3>Transport</h3>
+              <p>If transports fail to confirm a calmer index tape, the market may still be fighting a cost narrative under the surface.</p>
+            </article>
+            <article class="story-card">
+              <h3>Rates Sensitive</h3>
+              <p>REITs, software, and other duration-heavy pockets are useful tells for whether the bond market is actually loosening its grip.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Special Situations</div>
+          <p class="section-summary">
+            Multi-column blocks still look strong when each item reads like a short paragraph rather than a cramped bullet.
+          </p>
+          <div class="column-copy">
+            <article>
+              <h3>Capital Raises</h3>
+              <p>When the market is uncertain, equity issuance and refinancing headlines often reveal more about real risk appetite than broad index performance does.</p>
+            </article>
+            <article>
+              <h3>Guidance Risk</h3>
+              <p>Margin-sensitive names remain worth watching because they often translate inflation pressure into company-specific damage before the bigger macro debate settles.</p>
+            </article>
+            <article>
+              <h3>Policy Shock</h3>
+              <p>Any new sanctions, export controls, or central-bank language change can quickly move this section from a side column into the real lead of the edition.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Catalyst Calendar</div>
+          <p class="section-summary">
+            The calendar row can stay compact while still giving the reader a clear sense of what can reprice the tape next.
+          </p>
+          <div class="calendar-list">
+            <article>
+              <h3>Central Banks</h3>
+              <p>Minutes, speeches, and any repricing of the next policy path remain the first macro check on whether the market can extend risk.</p>
+            </article>
+            <article>
+              <h3>Inflation Data</h3>
+              <p>Inflation prints matter most when commodities and yields are already asking the same question ahead of time.</p>
+            </article>
+            <article>
+              <h3>Earnings</h3>
+              <p>Large multinationals and transport-linked names often provide the clearest read on whether the macro narrative is hitting the real economy.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Early-Info Signals</div>
+          <p class="section-summary">
+            A final strip for the “not fully priced yet” observations helps the paper feel more forward-looking.
+          </p>
+          <div class="signal-strip">
+            <article>
+              <h3>Oil vs Equities</h3>
+              <p>If crude stays firm while index volatility cools, the market may still be compressing two incompatible stories into one session.</p>
+            </article>
+            <article>
+              <h3>Dollar vs Risk</h3>
+              <p>A weaker dollar would make any relief move healthier. A sticky dollar would keep the bounce feeling narrower.</p>
+            </article>
+            <article>
+              <h3>Rates vs Tech</h3>
+              <p>If yields stay elevated and high-duration growth still rallies, that gap itself becomes an information signal worth respecting.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">What Matters Most</div>
+          <p class="section-summary">
+            The closing box works well when it reads like a short set of editorial conclusions rather than a bullet dump.
+          </p>
+          <ol class="wire-list">
+            <li>
+              <p class="wire-list__title">Highest-conviction read</p>
+              <p class="wire-list__summary">The page feels strongest when the close-out states one clear takeaway and then earns it with one short explanatory line underneath.</p>
+            </li>
+            <li>
+              <p class="wire-list__title">Biggest unresolved risk</p>
+              <p class="wire-list__summary">Cross-asset disagreement is still the thing to watch. If the cards stop confirming each other, the edition should say that bluntly.</p>
+            </li>
+            <li>
+              <p class="wire-list__title">Tomorrow’s tell</p>
+              <p class="wire-list__summary">The next day can hinge on whether rates, oil, and cyclicals move together or split further apart.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="news-section news-section--sources">
+          <div class="section-label">Sources</div>
+          <p class="section-summary">
+            Static preview sources below are just placeholders to show the typographic rhythm of the final section.
+          </p>
+          <ul class="source-link-list">
+            <li><a href="https://www.reuters.com/" target="_blank" rel="noreferrer">Reuters market reporting</a></li>
+            <li><a href="https://www.bls.gov/" target="_blank" rel="noreferrer">U.S. Bureau of Labor Statistics calendar</a></li>
+            <li><a href="https://www.federalreserve.gov/" target="_blank" rel="noreferrer">Federal Reserve calendars and statements</a></li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

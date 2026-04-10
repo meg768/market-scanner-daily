@@ -1,0 +1,70 @@
+This is what I want.
+
+I want a daily market newspaper that I can simply open and read every day.
+I do not want to rely on interactive prompting to get the result.
+
+The purpose is to scan world markets for:
+- special situations
+- catalyst trades
+- bigger-than-normal moves in assets and equities globally
+- early signs that something important is changing
+
+The key idea is to avoid starting from normal headline flow.
+I want to create news by asking the right market questions first.
+
+The first questions should be:
+- was the move bigger than normal
+- was volume higher or lower than normal
+- what moved, and on what volume
+- is volatility up or down
+- is volatility higher or lower than normal
+
+The first screen should focus on:
+- `USO` for oil direction, move size, and volume
+- `VIXY` for volatility direction, move size, and volume
+- `SPY` for broad equity-market direction, move size, and volume
+- major sector indexes or sector ETFs
+
+I want the base data and the significance of the move.
+I do not want lazy market language unless it is clearly supported.
+
+Examples of weak language to avoid:
+- relief rally
+- profit taking
+- short covering
+
+Instead, I want clearer statements such as:
+- how unusual the move was versus the last year
+- how unusual the trading volume was versus normal
+- whether volatility confirms or contradicts the move
+
+Important framing:
+- volatility is a core way to measure risk
+- the edition should think in terms of both return and risk
+- not only what moved the most, but what looked best or worst given volatility
+
+The tone should be:
+- calm
+- sharp
+- signal-first
+- newspaper-like
+- concise but still substantive
+
+What I want to avoid:
+- generic headline summaries
+- long low-signal company-news lists
+- too much explanation of basic market concepts
+- too much interactive product behavior
+
+The HTML version should:
+- keep the current layout direction
+- keep the newspaper feel
+- use serif typography
+- keep the masthead undertitle generic, not newsy
+
+Things to refine later:
+- exact section structure
+- exact source list
+- exact statistical thresholds for “bigger than normal”
+- how much weight to give U.S. markets versus the rest of the world
+- how much company-level news versus macro and cross-asset signals
