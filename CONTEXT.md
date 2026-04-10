@@ -9,7 +9,7 @@ This file stores the project memory for this workspace: workflow, operating rule
 - read this file first at the start of every new thread or restart
 - when the request is to run a scan, generate an edition, or shape edition content, read `this-is-what-i-want.txt` immediately after this file
 - treat `CONTEXT.md` as the source of truth for workflow, layout/presentation rules, runner behavior, and deployment
-- treat `this-is-what-i-want.txt` as the source of truth for the edition's content intent, emphasis, tone, and "what to avoid"
+- treat `this-is-what-i-want.txt` as the source of truth for which information, signals, assets, and market questions are interesting enough to surface in the edition
 - in user-facing replies, do not refer to these files by filename unless the user explicitly asks about the files themselves
 - keep all project documentation in English
 - when the user changes workflow, storage, automation, operating behavior, restart behavior, layout direction, or developer conventions, update this file
@@ -47,7 +47,7 @@ This file stores the project memory for this workspace: workflow, operating rule
 - internal runner shortcut: `market-scanner-daily-scan`
 - treat the exact prompt `market-scanner-daily-scan` as a direct instruction to generate the current daily edition
 - when handling `market-scanner-daily-scan`, run a fresh market scan using the normal project workflow
-- when handling `market-scanner-daily-scan`, read `this-is-what-i-want.txt` and let it guide the edition's priorities, framing, and tone
+- when handling `market-scanner-daily-scan`, read `this-is-what-i-want.txt` and let it guide which information and signals should be prioritized in the edition
 - when handling `market-scanner-daily-scan`, create `editions/` if it does not exist and update both `editions/YYYY-MM-DD.html` and `editions/latest.html`
 - when handling `market-scanner-daily-scan`, keep the masthead undertitle generic and purpose-based rather than day-specific or news-like
 - when handling `market-scanner-daily-scan`, preserve the established page layout and typography while letting the content follow the separate brief file
@@ -58,8 +58,8 @@ This file stores the project memory for this workspace: workflow, operating rule
 ## Content Reset
 
 - layout, workflow, and deployment rules stay here
-- the active edition-content brief currently lives in `this-is-what-i-want.txt`
-- keep that file separate from this memory so the desired newspaper content can evolve without bloating the workflow memory
+- the active information-interest brief currently lives in `this-is-what-i-want.txt`
+- keep that file separate from this memory so the list of interesting signals and assets can evolve without bloating the workflow memory
 - if a more permanent editorial brief is wanted later, it can replace or refine `this-is-what-i-want.txt`
 
 ## Project Setup And Restart

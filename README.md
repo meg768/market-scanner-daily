@@ -17,7 +17,7 @@ The project is best understood as a small publishing pipeline:
 The durable project memory lives in:
 
 - `CONTEXT.md` for workflow, runner behavior, layout direction, restart rules, and deployment
-- `this-is-what-i-want.txt` for the separate content brief that defines what the edition should emphasize and avoid
+- `this-is-what-i-want.txt` for the separate information brief that defines which signals, assets, and market questions are interesting
 
 ## HTML Daily Page
 
@@ -128,7 +128,7 @@ The current scratchpad is:
 
 - `this-is-what-i-want.txt`
 
-That file is the place to define what the publication should show, what it should avoid, and how the page should think about markets.
+That file is the place to define which market information is interesting enough to surface. It should not carry HTML or presentation instructions.
 
 ## Change Log
 
@@ -143,6 +143,7 @@ That file is the place to define what the publication should show, what it shoul
 - Added `this-is-what-i-want.txt` as the temporary scratch brief while the content direction is rebuilt
 - Added a static `preview.html` reference page while keeping `template.html` as the main layout source
 - Made the scan command chain explicitly read the separate brief so future editions keep the existing layout while following that content direction
+- Tightened the separate brief so it is only about interesting market information, not HTML or presentation rules
 
 ## Repository Layout
 
