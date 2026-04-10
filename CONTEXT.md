@@ -38,6 +38,7 @@ Use this section when the current user is using the scanner as an end user rathe
 - in user mode, treat short prompts such as `scan`, `What's new?`, and `help` as product-use commands rather than project-maintenance commands
 - in user mode, the main output is the in-chat daily paper
 - in user mode, when an HTML companion is produced for a scan, update `editions/YYYY-MM-DD.html` and `editions/latest.html` as part of the normal scan flow
+- in user mode, when a published Apache copy is refreshed, treat `/var/www/html/market-scanner-daily/index.html` as the public front page and `/var/www/html/market-scanner-daily/editions/` as the dated archive
 - in user mode, prefer explaining the product and the scan logic in simple language if the user asks how it works
 
 ### Developer Mode
@@ -69,6 +70,20 @@ Use this workflow to make restart behavior reliable:
 - when updating workflow or operating rules, update this file so future sessions inherit the change
 - when updating the editorial brief, source preferences, coverage rules, or presentation rules, update `CONTENTS.md` so future sessions inherit the change
 - when in doubt, prefer updating these memory files over hard-coding workflow behavior elsewhere
+
+## Deployment
+
+Current published-site layout on `pi-kato`:
+
+- repo clone: `/home/pi/market-scanner-daily`
+- Apache web root: `/var/www/html/market-scanner-daily`
+- public front page: `/var/www/html/market-scanner-daily/index.html`
+- public archive: `/var/www/html/market-scanner-daily/editions/`
+
+Publishing rule:
+
+- `run.sh --publish` should mirror local `editions/` into `/var/www/html/market-scanner-daily/editions/`
+- `run.sh --publish` should also copy `editions/latest.html` to `/var/www/html/market-scanner-daily/index.html` so Apache serves a normal site root rather than a bare file dump
 
 Practical rule:
 

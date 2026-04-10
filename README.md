@@ -112,6 +112,13 @@ Normal local flow:
 
 That keeps the HTML edition reproducible without depending on Node, Python, or a preview server.
 
+At publish time, the site should follow the same static-website pattern as the tennis project:
+
+- mirror local `editions/` into the published `editions/` directory
+- copy `editions/latest.html` to the site root as `index.html`
+
+That way Apache serves a normal front page while still keeping a browsable archive of dated editions.
+
 For layout iteration, edit `template.html` directly so the real local edition stays as the single source of both layout and styling.
 
 To retheme the generated HTML edition, change the `--theme-base` value near the top of the inline `<style>` block in `template.html`.
@@ -145,6 +152,53 @@ When working on the HTML presentation in developer mode, edit the real template 
 - Keep styling changes inside the inline `<style>` block in `template.html`
 - Prefer small, isolated style changes during design work
 - Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
+
+## Automation
+
+The repo includes a `run.sh` runner for scans.
+
+- `./run.sh`
+  Runs one scan and exits.
+
+- `./run.sh --publish`
+  Runs one scan, mirrors `editions/` into the Apache site archive, writes `editions/latest.html` as `index.html`, and exits.
+
+- `./run.sh --daily 15:30`
+  Waits for the next `15:30` in `Europe/Stockholm`, then runs once per day at that time.
+
+- `./run.sh --publish --daily 15:30`
+  Publishes after each daily run, writes `latest.html` to the site root as `index.html`, and keeps the process alive inside PM2.
+
+## Deployment
+
+Current production layout on `pi-kato`:
+
+- repo clone:
+  `/home/pi/market-scanner-daily`
+- published site root:
+  `/var/www/html/market-scanner-daily`
+- current edition at runtime:
+  `/var/www/html/market-scanner-daily/index.html`
+- dated/public archive files:
+  `/var/www/html/market-scanner-daily/editions/`
+
+The public site is meant to be a normal static Apache page, with the latest edition served from the site root and the dated archive kept under `editions/`.
+
+## Scheduling
+
+Current PM2 setup on `pi-kato`:
+
+- process name: `market-scanner-daily`
+- script: `/home/pi/market-scanner-daily/run.sh`
+- args: `--publish --daily 15:30`
+- timezone intent: `Europe/Stockholm`
+
+That means the public site should refresh automatically every trading day around the U.S. cash open, while manual runs can still be done with:
+
+```bash
+cd /home/pi/market-scanner-daily
+./run.sh --publish
+```
 
 ## Operating Modes
 
@@ -272,6 +326,11 @@ The scanner is intentionally configurable. Durable changes can be made to:
 Those changes should be preserved in the project memory so future scans follow the updated workflow automatically.
 
 ## Change Log
+
+### April 10, 2026
+
+- Switched published output to a real Apache site layout with `index.html` at the web root and dated files under `editions/`
+- Documented the production publish path on `pi-kato` and the PM2 daily publish schedule at `15:30` Swedish time
 
 ### April 7, 2026
 

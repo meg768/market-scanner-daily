@@ -12,7 +12,7 @@ usage() {
   cat <<'EOF'
 Usage: ./run.sh [--publish] [--daily HH:MM]
 
-  --publish       Publish editions/ to the web root after each scan
+  --publish       Publish editions/ to the web root and write latest as index.html
   --daily HH:MM   Wait for the next daily run at HH:MM in Europe/Stockholm
 
 Defaults:
@@ -90,7 +90,9 @@ run_scan() {
 
   if [[ "$PUBLISH" == "true" ]]; then
     mkdir -p "$PUBLISH_DIR"
-    rsync -az --delete "$REPO_DIR/editions/" "$PUBLISH_DIR/"
+    mkdir -p "$PUBLISH_DIR/editions"
+    rsync -az --delete "$REPO_DIR/editions/" "$PUBLISH_DIR/editions/"
+    cp "$REPO_DIR/editions/latest.html" "$PUBLISH_DIR/index.html"
   fi
 }
 
