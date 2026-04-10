@@ -79,6 +79,7 @@ Current published-site layout on `pi-kato`:
 - Apache web root: `/var/www/html/market-scanner-daily`
 - public front page: `/var/www/html/market-scanner-daily/index.html`
 - public archive: `/var/www/html/market-scanner-daily/editions/`
+- public hostname: `market-scanner-daily.egelberg.se`
 
 Publishing rule:
 

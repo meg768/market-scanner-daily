@@ -2,6 +2,10 @@
 
 Market Scanner Daily is a Codex-driven workspace for producing a daily world-markets paper centered on abnormal moves, catalyst trades, and special situations.
 
+The published site lives at:
+
+- `https://market-scanner-daily.egelberg.se`
+
 It is built to function more like an early-warning system than a generic market recap. The workflow starts with market behavior, asks what looks unusual, and only then uses reporting or official releases to explain what changed and why it matters.
 
 The same workspace can also be used as a market-analysis partner for testing narratives, comparing cross-asset signals, and discussing whether a move looks temporary, structural, or early.
@@ -177,6 +181,8 @@ Current production layout on `pi-kato`:
   `/home/pi/market-scanner-daily`
 - published site root:
   `/var/www/html/market-scanner-daily`
+- public hostname:
+  `market-scanner-daily.egelberg.se`
 - current edition at runtime:
   `/var/www/html/market-scanner-daily/index.html`
 - dated/public archive files:
@@ -331,6 +337,7 @@ Those changes should be preserved in the project memory so future scans follow t
 
 - Switched published output to a real Apache site layout with `index.html` at the web root and dated files under `editions/`
 - Documented the production publish path on `pi-kato` and the PM2 daily publish schedule at `15:30` Swedish time
+- Added the dedicated Apache hostname `market-scanner-daily.egelberg.se` for the published site
 
 ### April 7, 2026
 
