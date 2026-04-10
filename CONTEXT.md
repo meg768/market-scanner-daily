@@ -7,7 +7,9 @@ This file stores the project memory for this workspace: workflow, operating rule
 ## Memory Model
 
 - read this file first at the start of every new thread or restart
-- treat `CONTEXT.md` as the single source of truth for workflow, layout/presentation rules, runner behavior, and deployment
+- when the request is to run a scan, generate an edition, or shape edition content, read `this-is-what-i-want.txt` immediately after this file
+- treat `CONTEXT.md` as the source of truth for workflow, layout/presentation rules, runner behavior, and deployment
+- treat `this-is-what-i-want.txt` as the source of truth for the edition's content intent, emphasis, tone, and "what to avoid"
 - in user-facing replies, do not refer to these files by filename unless the user explicitly asks about the files themselves
 - keep all project documentation in English
 - when the user changes workflow, storage, automation, operating behavior, restart behavior, layout direction, or developer conventions, update this file
@@ -18,6 +20,7 @@ This file stores the project memory for this workspace: workflow, operating rule
 
 - startup rule: at the beginning of every new thread or restart, read this file before replying to the user or running commands
 - this startup rule applies even to casual greetings, short prompts, and trivial terminal-style requests
+- when the task involves scans or edition content, read `this-is-what-i-want.txt` before deciding what the page should say
 - scans are generated on demand in chat, while these memory files preserve durable intent, preferences, sources, and operating rules
 - do not assume the current user is the same as the future end user of the scanner; adapt tone and actions to the active role in the conversation
 - before relying on prior workflow assumptions, check this file as the source of truth for current behavior
@@ -42,19 +45,22 @@ This file stores the project memory for this workspace: workflow, operating rule
 
 - treat `scan` as the normal manual command when a fresh edition should be generated on demand
 - internal runner shortcut: `market-scanner-daily-scan`
+- treat the exact prompt `market-scanner-daily-scan` as a direct instruction to generate the current daily edition
 - when handling `market-scanner-daily-scan`, run a fresh market scan using the normal project workflow
+- when handling `market-scanner-daily-scan`, read `this-is-what-i-want.txt` and let it guide the edition's priorities, framing, and tone
 - when handling `market-scanner-daily-scan`, create `editions/` if it does not exist and update both `editions/YYYY-MM-DD.html` and `editions/latest.html`
 - when handling `market-scanner-daily-scan`, keep the masthead undertitle generic and purpose-based rather than day-specific or news-like
+- when handling `market-scanner-daily-scan`, preserve the established page layout and typography while letting the content follow the separate brief file
 - `market-scanner-daily-scan` should only generate the local edition files; publishing is handled by `run.sh`
 - never call `run.sh` from inside `market-scanner-daily-scan`
 - never start a nested runner process from `market-scanner-daily-scan`
 
 ## Content Reset
 
-- the durable content brief has been intentionally removed from this memory
-- layout and workflow rules stay here
-- the scratch content brief currently lives in `this-is-what-i-want.txt`
-- if a new durable editorial brief is wanted later, add it back carefully once the project direction is settled
+- layout, workflow, and deployment rules stay here
+- the active edition-content brief currently lives in `this-is-what-i-want.txt`
+- keep that file separate from this memory so the desired newspaper content can evolve without bloating the workflow memory
+- if a more permanent editorial brief is wanted later, it can replace or refine `this-is-what-i-want.txt`
 
 ## Project Setup And Restart
 

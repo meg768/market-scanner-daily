@@ -17,7 +17,7 @@ The project is best understood as a small publishing pipeline:
 The durable project memory lives in:
 
 - `CONTEXT.md` for workflow, runner behavior, layout direction, restart rules, and deployment
-- `this-is-what-i-want.txt` as the current scratchpad for rebuilding the content brief from scratch
+- `this-is-what-i-want.txt` for the separate content brief that defines what the edition should emphasize and avoid
 
 ## HTML Daily Page
 
@@ -29,7 +29,7 @@ The project now includes a newspaper-style HTML prototype in:
 - `preview.html`
 
 The layout is intentionally the main asset in the project right now.
-The current direction is to keep the layout and publishing flow stable while the content brief is rebuilt separately.
+The current direction is to keep the layout and publishing flow stable while the content brief lives separately from the workflow memory.
 
 Normal local flow:
 
@@ -75,6 +75,8 @@ The repo includes a `run.sh` runner for scans.
   Publishes after each daily run, writes `latest.html` to the site root as `index.html`, and keeps the process alive inside PM2.
 
 Internally, `run.sh` sends the short command `market-scanner-daily-scan` to Codex. That means the runner stays simple and the durable project rules stay in the project memory rather than in a long embedded prompt.
+That scan flow is expected to read the separate brief in `this-is-what-i-want.txt` whenever the edition content itself is being produced.
+In other words, the layout should remain consistent with the existing HTML pages, while the actual daily copy should be shaped by the separate brief.
 
 ## Publishing
 
@@ -126,7 +128,7 @@ The current scratchpad is:
 
 - `this-is-what-i-want.txt`
 
-That file is the place to capture what the publication should become before a new durable content brief is added back into the project memory.
+That file is the place to define what the publication should show, what it should avoid, and how the page should think about markets.
 
 ## Change Log
 
@@ -140,6 +142,7 @@ That file is the place to capture what the publication should become before a ne
 - Removed the `user mode` / `developer mode` split and simplified the project to one normal workflow
 - Added `this-is-what-i-want.txt` as the temporary scratch brief while the content direction is rebuilt
 - Added a static `preview.html` reference page while keeping `template.html` as the main layout source
+- Made the scan command chain explicitly read the separate brief so future editions keep the existing layout while following that content direction
 
 ## Repository Layout
 
