@@ -26,14 +26,13 @@ The project now includes a newspaper-style HTML prototype in:
 - `editions/YYYY-MM-DD.html`
 - `editions/latest.html`
 - `template.html`
-- `preview.html`
 
 The layout is intentionally the main asset in the project right now.
 The current direction is to keep the layout and publishing flow stable while the content brief lives separately from the workflow memory.
 
 Normal local flow:
 
-- fill `template.html` with the current edition content
+- use `template.html` as the layout/source file for HTML design changes
 - if `editions/` does not exist yet, create it before writing the generated files
 - write the readable companion page to `editions/YYYY-MM-DD.html` using the scan date
 - write the same content to `editions/latest.html`
@@ -43,20 +42,21 @@ Normal local flow:
 
 That keeps the HTML edition reproducible without depending on Node, Python, or a preview server.
 
-`preview.html` is a fixed static reference page for quick visual checks.
-
-For normal layout iteration, edit `template.html` directly so the real local edition stays as the single source of both layout and styling.
+`template.html` is now the single layout source for design iteration and visual checks.
 
 To retheme the generated HTML edition, change the `--theme-base` value near the top of the inline `<style>` block in `template.html`.
 
-## Template Workflow
+## HTML Workflow
 
-When working on the HTML presentation, edit the real template first instead of maintaining a separate preview page.
+When working on the HTML presentation, edit `template.html` directly.
 
 - Use `template.html` for structural layout changes
 - Keep styling changes inside the inline `<style>` block in `template.html`
 - Prefer small, isolated style changes during design work
 - Section labels such as `Front Page` and `Cross-Asset Dashboard` are intended to stay as plain text labels, not colored pill badges
+
+`template.html` now uses visible placeholders such as `{{lead_story_headline}}`, `{{dashboard_card_1_body}}`, and `{{what_matters_item_1_body}}`.
+Those placeholders are the slot map for where generated content belongs in the page.
 
 ## Automation
 
@@ -77,6 +77,16 @@ The repo includes a `run.sh` runner for scans.
 Internally, `run.sh` sends the short command `market-scanner-daily-scan` to Codex. That means the runner stays simple and the durable project rules stay in the project memory rather than in a long embedded prompt.
 That scan flow is expected to read the separate brief in `this-is-what-i-want.txt` whenever the edition content itself is being produced.
 In other words, the layout should remain consistent with the existing HTML pages, while the actual daily copy should be shaped by the separate brief.
+
+## Republish Current HTML
+
+If you want to tweak the existing HTML manually without generating a new edition, use:
+
+```bash
+./publish-current.sh
+```
+
+That command republishes the current `editions/latest.html` and the rest of `editions/` to the Apache web root without running a new scan.
 
 ## Publishing
 
@@ -141,9 +151,12 @@ That file is the place to define which market information is interesting enough 
 - Cleared the durable content brief out of the project memory so the editorial direction can be rebuilt from scratch
 - Removed the `user mode` / `developer mode` split and simplified the project to one normal workflow
 - Added `this-is-what-i-want.txt` as the temporary scratch brief while the content direction is rebuilt
-- Added a static `preview.html` reference page while keeping `template.html` as the main layout source
+- Simplified the HTML workflow to one layout file by keeping `template.html` as the single design source
 - Made the scan command chain explicitly read the separate brief so future editions keep the existing layout while following that content direction
 - Tightened the separate brief so it is only about interesting market information, not HTML or presentation rules
+- Added `publish-current.sh` so existing HTML can be republished without generating a new edition
+- Turned the single HTML template into an explicit slot-based layout map with visible placeholders
+- Refined the typography so all-caps labels share one sans serif system while the main lead headline stays serif
 
 ## Repository Layout
 

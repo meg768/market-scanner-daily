@@ -36,10 +36,13 @@ This file stores the project memory for this workspace: workflow, operating rule
 - `backup` means update one rolling git backup that can be returned to later
 - do not create separate named backup tags unless the user explicitly asks for them
 - `restore` means return the repository to the rolling backup point unless the user specifies a different one
-- when doing HTML design work without asking for a live scan, use `template.html` with small isolated changes rather than maintaining a separate preview page
+- when doing HTML design work without asking for a live scan, use `template.html` as the single layout source
 - for HTML design iteration, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
 - section titles in the HTML companion such as `Front Page` and `Cross-Asset Dashboard` should render as plain text only, without colored pill backgrounds behind the label itself
 - current preferred HTML direction: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
+- current preferred typography direction: every small label or title rendered in all caps should use the same sans serif family, while body copy can remain serif
+- current preferred lead-story direction: the main lead headline should use the same serif family as the body copy
+- when the user wants to tweak HTML without generating a new edition, edit the existing files and run `./publish-current.sh`
 
 ## Core Commands
 
@@ -50,7 +53,7 @@ This file stores the project memory for this workspace: workflow, operating rule
 - when handling `market-scanner-daily-scan`, read `this-is-what-i-want.txt` and let it guide which information and signals should be prioritized in the edition
 - when handling `market-scanner-daily-scan`, create `editions/` if it does not exist and update both `editions/YYYY-MM-DD.html` and `editions/latest.html`
 - when handling `market-scanner-daily-scan`, keep the masthead undertitle generic and purpose-based rather than day-specific or news-like
-- when handling `market-scanner-daily-scan`, preserve the established page layout and typography while letting the content follow the separate brief file
+- when handling `market-scanner-daily-scan`, preserve the established page layout and typography from `template.html` while letting the content follow the separate brief file
 - `market-scanner-daily-scan` should only generate the local edition files; publishing is handled by `run.sh`
 - never call `run.sh` from inside `market-scanner-daily-scan`
 - never start a nested runner process from `market-scanner-daily-scan`
@@ -89,6 +92,7 @@ Publishing rule:
 
 - `run.sh --publish` should mirror local `editions/` into `/var/www/html/market-scanner-daily/editions/`
 - `run.sh --publish` should also copy `editions/latest.html` to `/var/www/html/market-scanner-daily/index.html` so Apache serves a normal site root rather than a bare file dump
+- `publish-current.sh` should publish the existing `editions/` files without running a new scan
 
 Practical rule:
 

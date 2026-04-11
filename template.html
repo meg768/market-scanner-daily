@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{pageTitle}}</title>
-    <meta name="description" content="{{pageDescription}}" />
+    <title>Market Scanner Daily | Preview Edition</title>
+    <meta
+      name="description"
+      content="Static preview page for Market Scanner Daily."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap"
       rel="stylesheet"
     />
     <style>
 :root {
-  /* Change this one color to retheme the entire HTML edition. */
-  /* Saved previous favorite: #6caed8 */
   --theme-base: #6caed8;
   --canvas-top: color-mix(in srgb, var(--theme-base) 26%, white);
   --canvas: color-mix(in srgb, var(--theme-base) 17%, white);
@@ -25,10 +26,7 @@
   --ink: color-mix(in srgb, var(--theme-base) 10%, #171312);
   --muted: color-mix(in srgb, var(--theme-base) 22%, #5a6772);
   --rule: color-mix(in srgb, var(--theme-base) 14%, rgba(23, 19, 18, 0.12));
-  --rule-strong: color-mix(in srgb, var(--theme-base) 18%, rgba(23, 19, 18, 0.22));
   --accent: color-mix(in srgb, var(--theme-base) 82%, white);
-  --accent-soft: color-mix(in srgb, var(--theme-base) 10%, transparent);
-  --accent-mid: color-mix(in srgb, var(--theme-base) 58%, #5f6f7c);
   --accent-strong: color-mix(in srgb, var(--theme-base) 72%, #304656);
   --accent-dark: color-mix(in srgb, var(--theme-base) 44%, #163244);
   --positive: #1b6d58;
@@ -61,13 +59,6 @@ a {
   text-decoration: none;
 }
 
-a:hover,
-a:focus,
-a:active,
-a:visited {
-  text-decoration: none;
-}
-
 .page-shell {
   width: min(1220px, calc(100vw - 2rem));
   margin: 1.25rem auto 1.9rem;
@@ -91,17 +82,22 @@ a:visited {
 .masthead__rail,
 .section-label,
 .masthead__date,
+.market-card__move,
 .brief-card__title,
 .lead-story__kicker,
 .market-card h3,
-.market-card__move,
 .story-card h3,
 .signal-strip h3,
 .calendar-list h3,
-.column-copy h3 {
-  font-family: "Newsreader", Georgia, serif;
-  letter-spacing: 0.14em;
+.column-copy h3,
+.wire-list__title {
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.lead-story__headline {
+  font-family: "Newsreader", Georgia, serif;
 }
 
 .masthead__rail {
@@ -127,9 +123,7 @@ a:visited {
 
 .masthead__meta {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 0.45rem;
-  align-items: center;
   justify-items: center;
   padding-top: 1rem;
 }
@@ -176,10 +170,6 @@ a:visited {
 .section-label {
   grid-column: 1 / -1;
   display: block;
-  justify-self: start;
-  padding: 0;
-  background: none;
-  border-radius: 0;
   color: var(--accent-dark);
   font-size: 0.78rem;
   font-weight: 700;
@@ -197,12 +187,10 @@ a:visited {
 
 .lead-story__headline {
   margin: 0 0 0.9rem;
-  font-family: "Newsreader", Georgia, serif;
   font-size: clamp(1.5rem, 2.35vw, 2.1rem);
   line-height: 1.08;
   letter-spacing: -0.025em;
   font-weight: 600;
-  text-wrap: pretty;
 }
 
 .lead-story__deck {
@@ -213,7 +201,6 @@ a:visited {
 }
 
 .lead-story__body {
-  columns: 1;
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
@@ -234,74 +221,52 @@ a:visited {
   color: var(--accent-dark);
 }
 
-.front-page__sidebar {
-  display: grid;
-  gap: 1rem;
-}
-
-.brief-card,
-.story-card,
-.market-card {
-  padding: 1rem;
-  background: var(--card-surface);
-  border: 1px solid var(--rule);
-  border-radius: 1rem;
-}
-
-.brief-card__title {
-  margin: 0 0 0.75rem;
-  color: var(--accent-dark);
-  font-size: 0.67rem;
-  font-weight: 700;
-}
-
-.brief-card__text,
-.brief-list {
-  margin: 0;
-  font-size: 1.18rem;
-  line-height: 1.58;
-}
-
-.brief-links {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.brief-links p {
-  display: grid;
-  gap: 0.45rem;
-  margin: 0;
-}
-
-.brief-links__source {
-  color: var(--muted);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.brief-links__source:hover {
-  color: var(--accent-strong);
-}
-
-.brief-links__body {
-  font-size: 1.18rem;
-  line-height: 1.58;
-}
-
-.brief-list {
-  padding-left: 1rem;
-}
-
+.front-page__sidebar,
 .dashboard-grid,
 .story-grid,
 .calendar-list,
 .signal-strip {
   display: grid;
   gap: 1rem;
+}
+
+.brief-card,
+.story-card,
+.market-card,
+.calendar-list article,
+.signal-strip article,
+.column-copy article {
+  padding: 1rem;
+  background: var(--card-surface);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+}
+
+.brief-card__title,
+.market-card h3,
+.story-card h3,
+.calendar-list h3,
+.signal-strip h3,
+.column-copy h3 {
+  margin: 0 0 0.65rem;
+  color: var(--accent-dark);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.brief-list,
+.matters-list,
+.source-link-list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.brief-list li,
+.matters-list li,
+.source-link-list li {
+  margin-bottom: 0.65rem;
+  font-size: 1.18rem;
+  line-height: 1.58;
 }
 
 .dashboard-grid {
@@ -311,29 +276,14 @@ a:visited {
 .market-card {
   display: grid;
   align-content: start;
-  gap: 0;
   min-height: 100%;
-  background: var(--card-surface);
-}
-
-.market-card h3 {
-  margin: 0 0 0.45rem;
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
-.story-card h3,
-.calendar-list h3,
-.signal-strip h3 {
-  margin: 0 0 0.45rem;
-  color: var(--muted);
-  font-size: 0.72rem;
 }
 
 .market-card p,
 .story-card p,
 .calendar-list p,
-.signal-strip p {
+.signal-strip p,
+.column-copy p {
   margin: 0;
   font-size: 1.18rem;
   line-height: 1.56;
@@ -355,6 +305,19 @@ a:visited {
   color: var(--negative);
 }
 
+.section-summary {
+  margin: -0.35rem 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.56;
+}
+
+.story-grid,
+.calendar-list,
+.signal-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .column-copy {
   columns: 3;
   column-gap: 1.7rem;
@@ -363,87 +326,6 @@ a:visited {
 .column-copy article {
   break-inside: avoid;
   margin-bottom: 1.2rem;
-  padding: 1rem;
-  background: var(--card-surface);
-  border: 1px solid var(--rule);
-  border-radius: 1rem;
-}
-
-.column-copy h3 {
-  margin: 0 0 0.45rem;
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
-.column-copy p {
-  margin: 0;
-  font-size: 1.2rem;
-  line-height: 1.58;
-}
-
-.story-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.section-summary {
-  margin: -0.35rem 0 0;
-  color: var(--muted);
-  font-size: 1.2rem;
-  line-height: 1.56;
-}
-
-.story-card {
-  background: var(--card-surface);
-}
-
-.lead-story__headline a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.story-card__title {
-  margin: 0;
-  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
-  font-size: 1.22rem;
-  line-height: 1.56;
-}
-
-.story-card__source {
-  color: inherit;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.lead-story__headline a:hover,
-.story-card__source:hover {
-  color: var(--accent-strong);
-}
-
-.calendar-list,
-.signal-strip {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.calendar-list article,
-.signal-strip article {
-  padding: 1rem;
-  background: var(--card-surface);
-  border: 1px solid var(--rule);
-  border-radius: 1rem;
-}
-
-.matters-list,
-.sources-list {
-  margin: 0;
-  padding-left: 1.15rem;
-}
-
-.matters-list li,
-.sources-list li {
-  margin-bottom: 0.65rem;
-  font-size: 1.2rem;
-  line-height: 1.58;
 }
 
 .wire-list {
@@ -463,10 +345,9 @@ a:visited {
 
 .wire-list__title {
   margin: 0;
-  font-size: 1.22rem;
-  line-height: 1.56;
-  font-weight: 500;
-  color: color-mix(in srgb, var(--theme-base) 10%, #171312);
+  font-size: 0.74rem;
+  line-height: 1.32;
+  font-weight: 700;
 }
 
 .wire-list__summary {
@@ -476,57 +357,8 @@ a:visited {
   color: color-mix(in srgb, var(--theme-base) 18%, #2a3740);
 }
 
-.wire-list li:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.wire-list__source {
-  margin-bottom: 0.28rem;
-  color: var(--muted);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.wire-list__source:hover {
-  color: var(--accent-strong);
-}
-
-.wire-list span {
-  color: var(--muted);
-  font-family: "Newsreader", Georgia, serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.source-link-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.55rem 1.2rem;
-  margin: 0;
-  padding-left: 1.15rem;
-}
-
-.source-link-list li {
-  margin: 0;
-  font-size: 1.2rem;
-  line-height: 1.58;
-}
-
 .source-link-list a {
   color: var(--accent-dark);
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
-.source-link-list a:hover {
-  color: var(--accent-strong);
 }
 
 @media (max-width: 1140px) {
@@ -553,7 +385,6 @@ a:visited {
     border-radius: 0.95rem;
   }
 
-  .masthead__meta,
   .front-page,
   .dashboard-grid,
   .story-grid,
@@ -562,30 +393,8 @@ a:visited {
     grid-template-columns: 1fr;
   }
 
-  .dashboard-grid,
-  .story-grid,
-  .calendar-list,
-  .signal-strip,
-  .front-page__sidebar {
-    gap: 0.75rem;
-  }
-
-  .lead-story__body,
   .column-copy {
     columns: 1;
-  }
-
-  .brief-card,
-  .story-card,
-  .market-card,
-  .column-copy article,
-  .calendar-list article,
-  .signal-strip article {
-    padding: 0.8rem;
-  }
-
-  .market-card {
-    min-height: auto;
   }
 
   .masthead__rail {
@@ -593,34 +402,22 @@ a:visited {
     gap: 0.3rem;
   }
 }
-
-@media print {
-  html {
-    background: #fff;
-  }
-
-  .page-shell {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    border: 0;
-    background: #fff;
-  }
-}
-
     </style>
   </head>
   <body>
     <div class="page-shell">
       <header class="masthead">
         <div class="masthead__rail">
-          {{railItems}}
+          <span data-slot="rail_left">Rail left</span>
+          <span data-slot="rail_center">Rail center</span>
+          <span data-slot="rail_right">Rail right</span>
         </div>
-        <h1 class="masthead__title">{{title}}</h1>
+        <h1 class="masthead__title" data-slot="publication_title">Market Scanner Daily</h1>
         <div class="masthead__meta">
-          <p class="masthead__date">{{dateLine}}</p>
-          <p class="masthead__tagline">A signal-first daily brief on cross-asset moves, catalysts, and special situations.</p>
+          <p class="masthead__date" data-slot="edition_dateline">Edition dateline</p>
+          <p class="masthead__tagline">
+            <span data-slot="masthead_undertitle">Masthead undertitle</span>
+          </p>
         </div>
       </header>
 
@@ -628,60 +425,196 @@ a:visited {
         <section class="front-page">
           <div class="section-label">Front Page</div>
           <div class="lead-story">
-            <p class="lead-story__kicker">Lead Story</p>
+            <p class="lead-story__kicker" data-slot="lead_story_kicker">Lead story kicker</p>
             <h2 class="lead-story__headline">
-              <a href="{{leadLink}}" target="_blank" rel="noreferrer">
-                {{leadTitle}}
-              </a>
+              <span data-slot="lead_story_headline">Lead story headline</span>
             </h2>
             <p class="lead-story__deck">
-              {{leadSummary}}
+              <span data-slot="lead_story_deck">Lead story deck</span>
             </p>
             <div class="lead-story__body">
-              {{leadParagraphs}}
+              <p>
+                <span data-slot="lead_story_paragraph_1">Lead story paragraph 1</span>
+              </p>
+              <p>
+                <span data-slot="lead_story_paragraph_2">Lead story paragraph 2</span>
+              </p>
             </div>
           </div>
 
           <aside class="front-page__sidebar">
             <section class="brief-card">
-              <p class="brief-card__title">{{sidebarTitle}}</p>
+              <p class="brief-card__title" data-slot="sidebar_primary_title">Sidebar primary title</p>
               <ul class="brief-list">
-                {{sidebarPoints}}
+                <li data-slot="sidebar_primary_item_1">Sidebar primary item 1</li>
+                <li data-slot="sidebar_primary_item_2">Sidebar primary item 2</li>
+                <li data-slot="sidebar_primary_item_3">Sidebar primary item 3</li>
               </ul>
             </section>
 
             <section class="brief-card">
-              <p class="brief-card__title">{{sidebarLinksTitle}}</p>
-              <div class="brief-links">
-                {{frontPageItems}}
-              </div>
+              <p class="brief-card__title" data-slot="sidebar_secondary_title">Sidebar secondary title</p>
+              <ul class="brief-list">
+                <li data-slot="sidebar_secondary_item_1">Sidebar secondary item 1</li>
+                <li data-slot="sidebar_secondary_item_2">Sidebar secondary item 2</li>
+                <li data-slot="sidebar_secondary_item_3">Sidebar secondary item 3</li>
+              </ul>
             </section>
-
           </aside>
         </section>
 
-        {{sections}}
+        <section class="news-section">
+          <div class="section-label">Cross-Asset Dashboard</div>
+          <p class="section-summary">
+            <span data-slot="dashboard_summary">Dashboard summary</span>
+          </p>
+          <div class="dashboard-grid">
+            <article class="market-card">
+              <h3 data-slot="dashboard_card_1_label">Dashboard card 1 label</h3>
+              <p data-slot="dashboard_card_1_body">Dashboard card 1 body</p>
+              <p class="market-card__move market-card__move--up" data-slot="dashboard_card_1_footer">Dashboard card 1 footer</p>
+            </article>
+            <article class="market-card">
+              <h3 data-slot="dashboard_card_2_label">Dashboard card 2 label</h3>
+              <p data-slot="dashboard_card_2_body">Dashboard card 2 body</p>
+              <p class="market-card__move market-card__move--down" data-slot="dashboard_card_2_footer">Dashboard card 2 footer</p>
+            </article>
+            <article class="market-card">
+              <h3 data-slot="dashboard_card_3_label">Dashboard card 3 label</h3>
+              <p data-slot="dashboard_card_3_body">Dashboard card 3 body</p>
+              <p class="market-card__move market-card__move--up" data-slot="dashboard_card_3_footer">Dashboard card 3 footer</p>
+            </article>
+            <article class="market-card">
+              <h3 data-slot="dashboard_card_4_label">Dashboard card 4 label</h3>
+              <p data-slot="dashboard_card_4_body">Dashboard card 4 body</p>
+              <p class="market-card__move market-card__move--up" data-slot="dashboard_card_4_footer">Dashboard card 4 footer</p>
+            </article>
+            <article class="market-card">
+              <h3 data-slot="dashboard_card_5_label">Dashboard card 5 label</h3>
+              <p data-slot="dashboard_card_5_body">Dashboard card 5 body</p>
+              <p class="market-card__move market-card__move--up" data-slot="dashboard_card_5_footer">Dashboard card 5 footer</p>
+            </article>
+          </div>
+        </section>
 
         <section class="news-section">
-          <div class="section-label">{{whatMattersTitle}}</div>
+          <div class="section-label">Abnormal Moves</div>
           <p class="section-summary">
-            {{whatMattersSummary}}
+            <span data-slot="abnormal_moves_summary">Abnormal moves summary</span>
+          </p>
+          <div class="story-grid">
+            <article class="story-card">
+              <h3 data-slot="abnormal_move_1_title">Abnormal move 1 title</h3>
+              <p data-slot="abnormal_move_1_body">Abnormal move 1 body</p>
+            </article>
+            <article class="story-card">
+              <h3 data-slot="abnormal_move_2_title">Abnormal move 2 title</h3>
+              <p data-slot="abnormal_move_2_body">Abnormal move 2 body</p>
+            </article>
+            <article class="story-card">
+              <h3 data-slot="abnormal_move_3_title">Abnormal move 3 title</h3>
+              <p data-slot="abnormal_move_3_body">Abnormal move 3 body</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Special Situations</div>
+          <p class="section-summary">
+            <span data-slot="special_situations_summary">Special situations summary</span>
+          </p>
+          <div class="column-copy">
+            <article>
+              <h3 data-slot="special_situation_1_title">Special situation 1 title</h3>
+              <p data-slot="special_situation_1_body">Special situation 1 body</p>
+            </article>
+            <article>
+              <h3 data-slot="special_situation_2_title">Special situation 2 title</h3>
+              <p data-slot="special_situation_2_body">Special situation 2 body</p>
+            </article>
+            <article>
+              <h3 data-slot="special_situation_3_title">Special situation 3 title</h3>
+              <p data-slot="special_situation_3_body">Special situation 3 body</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Catalyst Calendar</div>
+          <p class="section-summary">
+            <span data-slot="catalyst_calendar_summary">Catalyst calendar summary</span>
+          </p>
+          <div class="calendar-list">
+            <article>
+              <h3 data-slot="calendar_item_1_title">Calendar item 1 title</h3>
+              <p data-slot="calendar_item_1_body">Calendar item 1 body</p>
+            </article>
+            <article>
+              <h3 data-slot="calendar_item_2_title">Calendar item 2 title</h3>
+              <p data-slot="calendar_item_2_body">Calendar item 2 body</p>
+            </article>
+            <article>
+              <h3 data-slot="calendar_item_3_title">Calendar item 3 title</h3>
+              <p data-slot="calendar_item_3_body">Calendar item 3 body</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">Early-Info Signals</div>
+          <p class="section-summary">
+            <span data-slot="early_info_summary">Early-info summary</span>
+          </p>
+          <div class="signal-strip">
+            <article>
+              <h3 data-slot="early_info_item_1_title">Early-info item 1 title</h3>
+              <p data-slot="early_info_item_1_body">Early-info item 1 body</p>
+            </article>
+            <article>
+              <h3 data-slot="early_info_item_2_title">Early-info item 2 title</h3>
+              <p data-slot="early_info_item_2_body">Early-info item 2 body</p>
+            </article>
+            <article>
+              <h3 data-slot="early_info_item_3_title">Early-info item 3 title</h3>
+              <p data-slot="early_info_item_3_body">Early-info item 3 body</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="news-section">
+          <div class="section-label">What Matters Most</div>
+          <p class="section-summary">
+            <span data-slot="what_matters_most_summary">What matters most summary</span>
           </p>
           <ol class="wire-list">
-            {{whatMattersItems}}
+            <li>
+              <p class="wire-list__title" data-slot="what_matters_item_1_title">What matters item 1 title</p>
+              <p class="wire-list__summary" data-slot="what_matters_item_1_body">What matters item 1 body</p>
+            </li>
+            <li>
+              <p class="wire-list__title" data-slot="what_matters_item_2_title">What matters item 2 title</p>
+              <p class="wire-list__summary" data-slot="what_matters_item_2_body">What matters item 2 body</p>
+            </li>
+            <li>
+              <p class="wire-list__title" data-slot="what_matters_item_3_title">What matters item 3 title</p>
+              <p class="wire-list__summary" data-slot="what_matters_item_3_body">What matters item 3 body</p>
+            </li>
           </ol>
         </section>
 
         <section class="news-section news-section--sources">
           <div class="section-label">Sources</div>
           <p class="section-summary">
-            Primary market-data and confirming-reporting sources used in the current edition.
+            <span data-slot="sources_summary">Sources summary</span>
           </p>
           <ul class="source-link-list">
-            {{sources}}
+            <li><a href="#" target="_blank" rel="noreferrer" data-slot="source_1_label">Source 1 label</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" data-slot="source_2_label">Source 2 label</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" data-slot="source_3_label">Source 3 label</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" data-slot="source_4_label">Source 4 label</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" data-slot="source_5_label">Source 5 label</a></li>
           </ul>
         </section>
-
       </main>
     </div>
   </body>
