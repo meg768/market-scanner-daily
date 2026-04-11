@@ -42,7 +42,7 @@ This file stores the project memory for this workspace: workflow, operating rule
 - current preferred HTML direction: keep the existing card structure, keep the toning consistent across all boxes, and make visual adjustments incrementally
 - current preferred typography direction: every small label or title rendered in all caps should use the same sans serif family, while body copy can remain serif
 - current preferred lead-story direction: the main lead headline should use the same serif family as the body copy
-- when the user wants to tweak HTML without generating a new edition, edit the existing files and run `./publish-current.sh`
+- when the user wants to tweak HTML without generating a new edition, edit the existing files and then run `./run.sh --publish`
 
 ## Core Commands
 
@@ -92,7 +92,6 @@ Publishing rule:
 
 - `run.sh --publish` should mirror local `editions/` into `/var/www/html/market-scanner-daily/editions/`
 - `run.sh --publish` should also copy `editions/latest.html` to `/var/www/html/market-scanner-daily/index.html` so Apache serves a normal site root rather than a bare file dump
-- `publish-current.sh` should publish the existing `editions/` files without running a new scan
 
 Practical rule:
 

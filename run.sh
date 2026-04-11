@@ -2,6 +2,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+PUBLISH_DIR="/var/www/html/market-scanner-daily"
 SCAN_COMMAND="market-scanner-daily-scan"
 TIMEZONE="Europe/Stockholm"
 PUBLISH=false
@@ -88,7 +89,17 @@ run_scan() {
   codex exec --full-auto -C "$REPO_DIR" "$SCAN_COMMAND" < /dev/null
 
   if [[ "$PUBLISH" == "true" ]]; then
-    "$REPO_DIR/publish-current.sh"
+    if [[ ! -f "$REPO_DIR/editions/latest.html" ]]; then
+      echo "Cannot publish: $REPO_DIR/editions/latest.html does not exist" >&2
+      exit 1
+    fi
+
+    mkdir -p "$PUBLISH_DIR"
+    mkdir -p "$PUBLISH_DIR/editions"
+    rsync -az --delete "$REPO_DIR/editions/" "$PUBLISH_DIR/editions/"
+    cp "$REPO_DIR/editions/latest.html" "$PUBLISH_DIR/index.html"
+
+    echo "Published current HTML from editions/latest.html"
   fi
 }
 

@@ -78,16 +78,6 @@ Internally, `run.sh` sends the short command `market-scanner-daily-scan` to Code
 That scan flow is expected to read the separate brief in `this-is-what-i-want.txt` whenever the edition content itself is being produced.
 In other words, the layout should remain consistent with the existing HTML pages, while the actual daily copy should be shaped by the separate brief.
 
-## Republish Current HTML
-
-If you want to tweak the existing HTML manually without generating a new edition, use:
-
-```bash
-./publish-current.sh
-```
-
-That command republishes the current `editions/latest.html` and the rest of `editions/` to the Apache web root without running a new scan.
-
 ## Publishing
 
 At publish time:
@@ -154,7 +144,7 @@ That file is the place to define which market information is interesting enough 
 - Simplified the HTML workflow to one layout file by keeping `template.html` as the single design source
 - Made the scan command chain explicitly read the separate brief so future editions keep the existing layout while following that content direction
 - Tightened the separate brief so it is only about interesting market information, not HTML or presentation rules
-- Added `publish-current.sh` so existing HTML can be republished without generating a new edition
+- Folded the publish helper back into `run.sh` and removed the separate `publish-current.sh` script
 - Turned the single HTML template into an explicit slot-based layout map with visible placeholders
 - Refined the typography so all-caps labels share one sans serif system while the main lead headline stays serif
 
